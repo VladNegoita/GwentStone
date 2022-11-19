@@ -1,6 +1,7 @@
 package cards.MinionCards;
 
 import cards.Card;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class Minion extends Card {
         this.used = used;
     }
 
+    @JsonIgnore
     private boolean used = false;
 
     public int getHealth() {
@@ -78,10 +80,5 @@ public class Minion extends Card {
     @Override
     public void setName(String name) {
         super.setName(name);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

@@ -1,11 +1,13 @@
 package main;
 
+import actions.Action;
 import checker.Checker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import fileio.GameInput;
 import fileio.Input;
@@ -83,8 +85,14 @@ public final class Main {
         for (GameInput gameInput : inputData.getGames()) {
             Helpers.loadStartGame(table, gameInput.getStartGame());
 
-            for (ActionsInput action : gameInput.getActions()) {
+            for (ActionsInput actionInput : gameInput.getActions()) {
+                Action action = Helpers.getAction(actionInput);
 
+                ObjectNode objectNode = action.apply(table);
+                if (objectNode != null)
+                    output.add(objectNode);
+
+                table.refresh();
             }
         }
 

@@ -2,6 +2,7 @@ package cards.HeroCards;
 
 import cards.Ability;
 import cards.Card;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,8 @@ public abstract class Hero extends Card implements Ability {
     }
 
     private int health = 30;
+
+    @JsonIgnore
     private boolean used = false;
 
     public boolean isUsed() {
@@ -72,10 +75,4 @@ public abstract class Hero extends Card implements Ability {
     public void setName(String name) {
         super.setName(name);
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
 }

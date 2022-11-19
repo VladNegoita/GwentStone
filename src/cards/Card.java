@@ -46,14 +46,4 @@ public abstract class Card {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Override
-    public String toString() {
-        return "Card{" +
-                "mana=" + mana +
-                ", description='" + description + '\'' +
-                ", colors=" + colors +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

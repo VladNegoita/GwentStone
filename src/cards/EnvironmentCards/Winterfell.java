@@ -51,9 +51,4 @@ public class Winterfell extends Environment {
     public void setName(String name) {
         super.setName(name);
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

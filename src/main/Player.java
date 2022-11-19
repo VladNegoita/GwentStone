@@ -10,6 +10,15 @@ public class Player {
     private ArrayList <Card> hand;
     private ArrayList <Card> currentDeck;
     private ArrayList <ArrayList<Card>> decks;
+    private int mana;
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
 
     public ArrayList<Card> getCurrentDeck() {
         return currentDeck;

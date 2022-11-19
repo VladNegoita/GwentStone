@@ -53,9 +53,4 @@ public abstract class Environment extends Card implements Ability {
     public void setName(String name) {
         super.setName(name);
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

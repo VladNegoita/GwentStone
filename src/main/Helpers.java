@@ -1,5 +1,6 @@
 package main;
 
+import actions.*;
 import cards.Card;
 import cards.EnvironmentCards.Firestorm;
 import cards.EnvironmentCards.HeartHound;
@@ -14,6 +15,7 @@ import cards.MinionCards.Minion;
 import cards.MinionCards.Miraj;
 import cards.MinionCards.TheCursedOne;
 import cards.MinionCards.TheRipper;
+import fileio.ActionsInput;
 import fileio.CardInput;
 import fileio.DecksInput;
 import fileio.StartGameInput;
@@ -96,9 +98,6 @@ public class Helpers {
         table.getPlayer1().setHero((Hero)getCard(startGame.getPlayerOneHero()));
         table.getPlayer2().setHero((Hero)getCard(startGame.getPlayerTwoHero()));
 
-        table.getPlayer1().setHand(new ArrayList<>());
-        table.getPlayer2().setHand(new ArrayList<>());
-
         ArrayList<Card> deck1 = new ArrayList<>(table.getPlayer1().getDecks().get(startGame.getPlayerOneDeckIdx()));
         Collections.shuffle(deck1, new Random(startGame.getShuffleSeed()));
         ArrayList<Card> deck2 = new ArrayList<>(table.getPlayer2().getDecks().get(startGame.getPlayerTwoDeckIdx()));
@@ -106,5 +105,31 @@ public class Helpers {
 
         table.getPlayer1().setCurrentDeck(new ArrayList<>(deck1));
         table.getPlayer2().setCurrentDeck(new ArrayList<>(deck2));
+
+        table.getPlayer1().setHand(new ArrayList<>());
+        table.getPlayer1().getHand().add(table.getPlayer1().getCurrentDeck().get(0));
+        table.getPlayer1().getCurrentDeck().remove(0);
+        table.getPlayer2().setHand(new ArrayList<>());
+        table.getPlayer2().getHand().add(table.getPlayer2().getCurrentDeck().get(0));
+        table.getPlayer2().getCurrentDeck().remove(0);
+
+        table.setCurrentPlayer(startGame.getStartingPlayer());
+
+        table.getPlayer1().setMana(1);
+        table.getPlayer2().setMana(1);
+    }
+
+    public static Action getAction(ActionsInput actionInput) {
+
+        return switch (actionInput.getCommand()) {
+            case "getPlayerDeck" -> new GetPlayerDeck(actionInput.getCommand(), actionInput.getPlayerIdx());
+            case "getPlayerHero" -> new GetPlayerHero(actionInput.getCommand(), actionInput.getPlayerIdx());
+            case "getPlayerTurn" -> new GetPlayerTurn(actionInput.getCommand());
+            case "endPlayerTurn" -> new EndPlayerTurn(actionInput.getCommand());
+            case "placeCard" -> new PlaceCard(actionInput.getCommand(), actionInput.getHandIdx());
+            case "getCardsInHand" -> new GetCardsInHand(actionInput.getCommand(), actionInput.getPlayerIdx());
+            case "getPlayerMana" -> new GetPlayerMana(actionInput.getCommand(), actionInput.getPlayerIdx());
+            default -> null;
+        };
     }
 }
