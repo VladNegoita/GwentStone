@@ -3,6 +3,10 @@ package cards.HeroCards;
 import java.util.ArrayList;
 
 public class LordRoyce extends Hero {
+    public LordRoyce(int mana, String description, ArrayList<String> colors, String name) {
+        super(mana, description, colors, name);
+    }
+
     @Override
     public int getHealth() {
         return super.getHealth();
@@ -36,6 +40,16 @@ public class LordRoyce extends Hero {
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    @Override
+    public boolean isUsed() {
+        return super.isUsed();
+    }
+
+    @Override
+    public void setUsed(boolean used) {
+        super.setUsed(used);
     }
 
     @Override

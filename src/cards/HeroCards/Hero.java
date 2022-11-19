@@ -6,7 +6,20 @@ import cards.Card;
 import java.util.ArrayList;
 
 public abstract class Hero extends Card implements Ability {
+    public Hero(int mana, String description, ArrayList<String> colors, String name) {
+        super(mana, description, colors, name);
+    }
+
     private int health = 30;
+    private boolean used = false;
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
 
     public int getHealth() {
         return health;

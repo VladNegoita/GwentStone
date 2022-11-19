@@ -6,7 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
+import fileio.ActionsInput;
+import fileio.GameInput;
 import fileio.Input;
+import fileio.StartGameInput;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +19,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 /**
- * The entry point to this homework. It runs the checker that tests your implentation.
+ * The entry point to this homework. It runs the checker that tests your implementation.
  */
 public final class Main {
     /**
@@ -69,7 +72,21 @@ public final class Main {
 
         ArrayNode output = objectMapper.createArrayNode();
 
-        //TODO add here the entry point to your implementation
+        // initial setup
+        Table table = new Table();
+        table.setPlayer1(new Player());
+        table.setPlayer2(new Player());
+        table.getPlayer1().setDecks(Helpers.getDecks(inputData.getPlayerOneDecks()));
+        table.getPlayer2().setDecks(Helpers.getDecks(inputData.getPlayerTwoDecks()));
+
+        // start games
+        for (GameInput gameInput : inputData.getGames()) {
+            Helpers.loadStartGame(table, gameInput.getStartGame());
+
+            for (ActionsInput action : gameInput.getActions()) {
+
+            }
+        }
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);

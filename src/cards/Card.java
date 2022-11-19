@@ -3,6 +3,13 @@ package cards;
 import java.util.ArrayList;
 
 public abstract class Card {
+    public Card(int mana, String description, ArrayList<String> colors, String name) {
+        this.mana = mana;
+        this.description = description;
+        this.colors = colors;
+        this.name = name;
+    }
+
     private int mana;
     private String description;
     private ArrayList<String> colors;

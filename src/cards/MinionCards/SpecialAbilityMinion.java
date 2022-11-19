@@ -6,6 +6,21 @@ import java.util.ArrayList;
 
 public abstract class SpecialAbilityMinion extends Minion implements Ability {
 
+    public SpecialAbilityMinion(int mana, String description, ArrayList<String> colors, String name, int health,
+                                int attackDamage) {
+        super(mana, description, colors, name, health, attackDamage);
+    }
+
+    @Override
+    public boolean isUsed() {
+        return super.isUsed();
+    }
+
+    @Override
+    public void setUsed(boolean used) {
+        super.setUsed(used);
+    }
+
     @Override
     public void specialAbility() {
 

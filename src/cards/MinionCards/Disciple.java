@@ -3,9 +3,23 @@ package cards.MinionCards;
 import java.util.ArrayList;
 
 public class Disciple extends SpecialAbilityMinion {
+    public Disciple(int mana, String description, ArrayList<String> colors, String name, int health, int attackDamage) {
+        super(mana, description, colors, name, health, attackDamage);
+    }
+
     @Override
     public void specialAbility() {
         // TODO
+    }
+
+    @Override
+    public boolean isUsed() {
+        return super.isUsed();
+    }
+
+    @Override
+    public void setUsed(boolean used) {
+        super.setUsed(used);
     }
 
     @Override

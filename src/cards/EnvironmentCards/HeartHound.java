@@ -3,6 +3,10 @@ package cards.EnvironmentCards;
 import java.util.ArrayList;
 
 public class HeartHound extends Environment {
+    public HeartHound(int mana, String description, ArrayList<String> colors, String name) {
+        super(mana, description, colors, name);
+    }
+
     @Override
     public void specialAbility() {
         // TODO

@@ -3,6 +3,20 @@ package cards.MinionCards;
 import java.util.ArrayList;
 
 public class Miraj extends SpecialAbilityMinion {
+    public Miraj(int mana, String description, ArrayList<String> colors, String name, int health, int attackDamage) {
+        super(mana, description, colors, name, health, attackDamage);
+    }
+
+    @Override
+    public boolean isUsed() {
+        return super.isUsed();
+    }
+
+    @Override
+    public void setUsed(boolean used) {
+        super.setUsed(used);
+    }
+
     @Override
     public void specialAbility() {
         // TODO

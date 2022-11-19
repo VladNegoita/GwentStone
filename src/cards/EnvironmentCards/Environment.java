@@ -6,6 +6,10 @@ import cards.Card;
 import java.util.ArrayList;
 
 public abstract class Environment extends Card implements Ability {
+    public Environment(int mana, String description, ArrayList<String> colors, String name) {
+        super(mana, description, colors, name);
+    }
+
     @Override
     public void specialAbility() {
     }
