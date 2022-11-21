@@ -19,6 +19,15 @@ public abstract class Card {
         return mana;
     }
 
+    public Card(Card other) {
+        this.mana = other.mana;
+        this.description = new String(other.description);
+        this.name = new String(other.name);
+        this.colors = new ArrayList<>();
+        for (String s : other.colors)
+            this.colors.add(new String(s));
+    }
+
     public String getDescription() {
         return description;
     }

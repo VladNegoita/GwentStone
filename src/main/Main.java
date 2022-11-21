@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import fileio.GameInput;
 import fileio.Input;
-import fileio.StartGameInput;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +67,7 @@ public final class Main {
      */
     public static void action(final String filePath1,
                               final String filePath2) throws IOException {
+
         ObjectMapper objectMapper = new ObjectMapper();
         Input inputData = objectMapper.readValue(new File(CheckerConstants.TESTS_PATH + filePath1),
                 Input.class);

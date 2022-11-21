@@ -1,5 +1,7 @@
 package cards.MinionCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class Disciple extends SpecialAbilityMinion {
@@ -80,5 +82,19 @@ public class Disciple extends SpecialAbilityMinion {
     @Override
     public void setName(String name) {
         super.setName(name);
+    }
+
+    public Disciple(Card other) {
+        super(other);
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return super.isFrozen();
+    }
+
+    @Override
+    public void setFrozen(boolean frozen) {
+        super.setFrozen(frozen);
     }
 }

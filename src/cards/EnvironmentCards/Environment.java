@@ -53,4 +53,8 @@ public abstract class Environment extends Card implements Ability {
     public void setName(String name) {
         super.setName(name);
     }
+
+    public Environment(Card other) {
+        super(other);
+    }
 }

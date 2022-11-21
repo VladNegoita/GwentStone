@@ -4,7 +4,9 @@ import cards.Card;
 
 import java.util.ArrayList;
 
-public class Table {
+import static java.lang.Integer.min;
+
+public final class Table {
     private Player player1, player2;
     ArrayList<ArrayList<Card>> table;
     private int currentPlayer;
@@ -55,8 +57,18 @@ public class Table {
             this.endedTurns = 0;
             this.currentRound += 1;
 
-            this.player1.setMana(this.player1.getMana() + this.currentRound);
-            this.player2.setMana(this.player2.getMana() + this.currentRound);
+            this.player1.setMana(this.player1.getMana() + min(this.currentRound, 10));
+            this.player2.setMana(this.player2.getMana() + min(this.currentRound, 10));
+
+            if (this.player1.getCurrentDeck().size() > 0) {
+                this.player1.getHand().add(this.player1.getCurrentDeck().get(0));
+                this.player1.getCurrentDeck().remove(0);
+            }
+
+            if (this.player2.getCurrentDeck().size() > 0) {
+                this.player2.getHand().add(this.player2.getCurrentDeck().get(0));
+                this.player2.getCurrentDeck().remove(0);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.Helpers;
 import main.Table;
 
 public class GetPlayerDeck extends Action {
@@ -28,9 +29,9 @@ public class GetPlayerDeck extends Action {
         output.put("command", this.getCommand());
         output.put("playerIdx", this.playerIdx);
         if (playerIdx == 1)
-            output.putPOJO("output", table.getPlayer1().getCurrentDeck());
+            output.putPOJO("output", Helpers.getDeepCopy(table.getPlayer1().getCurrentDeck()));
         else
-            output.putPOJO("output", table.getPlayer2().getCurrentDeck());
+            output.putPOJO("output", Helpers.getDeepCopy(table.getPlayer2().getCurrentDeck()));
 
         return output;
     }

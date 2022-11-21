@@ -1,8 +1,9 @@
 package actions;
 
-import cards.EnvironmentCards.Environment;
+import cards.Card;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.Helpers;
 import main.Player;
 import main.Table;
 
@@ -32,6 +33,20 @@ public class PlaceCard extends Action {
         super.setCommand(command);
     }
 
+    private int getCorrespondingLine(Card card, int currentPlayer) {
+
+        int correspondingLine = switch(card.getName()) {
+            case "Sentinel", "Berserker", "The Cursed One", "Disciple" -> 0;
+            case "The Ripper", "Miraj", "Goliath", "Warden" -> 1;
+            default -> 404;
+        };
+
+        if (currentPlayer == 1)
+            correspondingLine = 3 - correspondingLine;
+
+        return correspondingLine;
+    }
+
     @Override
     public ObjectNode apply(Table table) {
         final ObjectMapper mapper = new ObjectMapper();
@@ -40,18 +55,25 @@ public class PlaceCard extends Action {
         output.put("handIdx", this.handIdx);
 
         Player currentPlayer = (table.getCurrentPlayer() == 1 ? table.getPlayer1() : table.getPlayer2());
-        if (currentPlayer.getHand().get(handIdx) instanceof Environment) {
-            output.putPOJO("output", "Cannot place environment card on table.");
+        if (Helpers.isEnvironment(currentPlayer.getHand().get(handIdx))) {
+            output.putPOJO("error", "Cannot place environment card on table.");
             return output;
         }
 
         if (currentPlayer.getMana() < currentPlayer.getHand().get(handIdx).getMana()) {
-            output.putPOJO("output", "Not enough mana to place card on table.");
+            output.putPOJO("error", "Not enough mana to place card on table.");
             return output;
         }
 
-        // TODO
-        
+        int correspondingLine = this.getCorrespondingLine(currentPlayer.getHand().get(handIdx), table.getCurrentPlayer());
+        if (table.getTable().get(correspondingLine).size() == 5) {
+            output.putPOJO("error", "Cannot place card on table since row is full.");
+            return output;
+        }
+
+        table.getTable().get(correspondingLine).add(currentPlayer.getHand().get(handIdx));
+        currentPlayer.setMana(currentPlayer.getMana() - currentPlayer.getHand().get(handIdx).getMana());
+        currentPlayer.getHand().remove(handIdx);
         return null;
     }
 }

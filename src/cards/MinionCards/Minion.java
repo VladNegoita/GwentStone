@@ -26,6 +26,25 @@ public class Minion extends Card {
     @JsonIgnore
     private boolean used = false;
 
+    @JsonIgnore
+    private boolean frozen = false;
+
+    public Minion(Card other) {
+        super(other);
+        this.health = ((Minion)other).getHealth();
+        this.attackDamage = ((Minion)other).getAttackDamage();
+        this.used = ((Minion)other).isUsed();
+        this.frozen = ((Minion)other).isFrozen();
+    }
+
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
+
     public int getHealth() {
         return health;
     }

@@ -1,5 +1,7 @@
 package cards.EnvironmentCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class HeartHound extends Environment {
@@ -50,5 +52,9 @@ public class HeartHound extends Environment {
     @Override
     public void setName(String name) {
         super.setName(name);
+    }
+
+    public HeartHound(Card other) {
+        super(other);
     }
 }

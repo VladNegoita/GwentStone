@@ -1,5 +1,7 @@
 package cards.EnvironmentCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class Firestorm extends Environment {
@@ -30,6 +32,10 @@ public class Firestorm extends Environment {
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    public Firestorm(Card other) {
+        super(other);
     }
 
     @Override

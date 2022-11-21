@@ -1,5 +1,7 @@
 package cards.EnvironmentCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class Winterfell extends Environment {
@@ -35,6 +37,10 @@ public class Winterfell extends Environment {
     @Override
     public void setMana(int mana) {
         super.setMana(mana);
+    }
+
+    public Winterfell(Card other) {
+        super(other);
     }
 
     @Override

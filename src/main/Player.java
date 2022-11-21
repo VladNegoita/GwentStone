@@ -5,7 +5,7 @@ import cards.HeroCards.Hero;
 
 import java.util.ArrayList;
 
-public class Player {
+public final class Player {
     private Hero hero;
     private ArrayList <Card> hand;
     private ArrayList <Card> currentDeck;

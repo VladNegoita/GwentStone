@@ -1,5 +1,7 @@
 package cards.MinionCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class TheRipper extends SpecialAbilityMinion {
@@ -56,6 +58,20 @@ public class TheRipper extends SpecialAbilityMinion {
     @Override
     public ArrayList<String> getColors() {
         return super.getColors();
+    }
+
+    public TheRipper(Card other) {
+        super(other);
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return super.isFrozen();
+    }
+
+    @Override
+    public void setFrozen(boolean frozen) {
+        super.setFrozen(frozen);
     }
 
     @Override

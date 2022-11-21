@@ -1,5 +1,7 @@
 package cards.HeroCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class EmpressThorina extends Hero {
@@ -55,6 +57,10 @@ public class EmpressThorina extends Hero {
     @Override
     public void setMana(int mana) {
         super.setMana(mana);
+    }
+
+    public EmpressThorina(Card other) {
+        super(other);
     }
 
     @Override

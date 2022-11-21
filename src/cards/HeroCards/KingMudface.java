@@ -1,5 +1,7 @@
 package cards.HeroCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class KingMudface extends Hero {
@@ -50,6 +52,10 @@ public class KingMudface extends Hero {
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    public KingMudface(Card other) {
+        super(other);
     }
 
     @Override

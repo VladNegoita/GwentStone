@@ -1,5 +1,7 @@
 package cards.MinionCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class Miraj extends SpecialAbilityMinion {
@@ -65,6 +67,20 @@ public class Miraj extends SpecialAbilityMinion {
     @Override
     public void setMana(int mana) {
         super.setMana(mana);
+    }
+
+    public Miraj(Card other) {
+        super(other);
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return super.isFrozen();
+    }
+
+    @Override
+    public void setFrozen(boolean frozen) {
+        super.setFrozen(frozen);
     }
 
     @Override

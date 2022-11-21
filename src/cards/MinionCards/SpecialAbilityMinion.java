@@ -1,6 +1,7 @@
 package cards.MinionCards;
 
 import cards.Ability;
+import cards.Card;
 
 import java.util.ArrayList;
 
@@ -69,6 +70,20 @@ public abstract class SpecialAbilityMinion extends Minion implements Ability {
     @Override
     public void setMana(int mana) {
         super.setMana(mana);
+    }
+
+    public SpecialAbilityMinion(Card other) {
+        super(other);
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return super.isFrozen();
+    }
+
+    @Override
+    public void setFrozen(boolean frozen) {
+        super.setFrozen(frozen);
     }
 
     @Override

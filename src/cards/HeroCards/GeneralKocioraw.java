@@ -1,5 +1,7 @@
 package cards.HeroCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class GeneralKocioraw extends Hero {
@@ -40,6 +42,10 @@ public class GeneralKocioraw extends Hero {
     @Override
     public String getDescription() {
         return super.getDescription();
+    }
+
+    public GeneralKocioraw(Card other) {
+        super(other);
     }
 
     @Override

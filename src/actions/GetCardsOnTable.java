@@ -3,6 +3,7 @@ package actions;
 import cards.Card;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.Helpers;
 import main.Table;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class GetCardsOnTable extends Action {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());
-        output.putPOJO("output", table.getTable());
+        output.putPOJO("output", Helpers.getDeepCopyTable(table.getTable()));
         return output;
     }
 }

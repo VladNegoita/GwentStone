@@ -1,6 +1,14 @@
 package main;
 
-import actions.*;
+import actions.Action;
+import actions.EndPlayerTurn;
+import actions.GetCardsInHand;
+import actions.GetCardsOnTable;
+import actions.GetPlayerDeck;
+import actions.GetPlayerHero;
+import actions.GetPlayerMana;
+import actions.GetPlayerTurn;
+import actions.PlaceCard;
 import cards.Card;
 import cards.EnvironmentCards.Firestorm;
 import cards.EnvironmentCards.HeartHound;
@@ -20,64 +28,61 @@ import fileio.CardInput;
 import fileio.DecksInput;
 import fileio.StartGameInput;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
-public class Helpers {
+public final class Helpers {
     public static Card getCard(CardInput cardInput) {
-        Card newCard;
-        switch (cardInput.getName()) {
-            case "Firestorm":
-                newCard = new Firestorm(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+        return switch (cardInput.getName()) {
+            case "Firestorm" -> new Firestorm(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName());
-                break;
-            case "Heart Hound":
-                newCard = new HeartHound(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "Heart Hound" -> new HeartHound(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName());
-                break;
-            case "Winterfell":
-                newCard = new Winterfell(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "Winterfell" -> new Winterfell(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName());
-                break;
-            case "Empress Thorina":
-                newCard = new EmpressThorina(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "Empress Thorina" -> new EmpressThorina(cardInput.getMana(), cardInput.getDescription(),
+                    cardInput.getColors(),
                         cardInput.getName());
-                break;
-            case "General Kocioraw":
-                newCard = new GeneralKocioraw(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "General Kocioraw" -> new GeneralKocioraw(cardInput.getMana(), cardInput.getDescription(),
+                    cardInput.getColors(),
                         cardInput.getName());
-                break;
-            case "King Mudface":
-                newCard = new KingMudface(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "King Mudface" -> new KingMudface(cardInput.getMana(), cardInput.getDescription(),
+                    cardInput.getColors(),
                         cardInput.getName());
-                break;
-            case "Lord Royce":
-                newCard = new LordRoyce(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "Lord Royce" -> new LordRoyce(cardInput.getMana(), cardInput.getDescription(),
+                    cardInput.getColors(),
                         cardInput.getName());
-                break;
-            case "Miraj":
-                newCard = new Miraj(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "Miraj" -> new Miraj(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName(), cardInput.getHealth(), cardInput.getAttackDamage());
-                break;
-            case "Disciple":
-                newCard = new Disciple(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "Disciple" -> new Disciple(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName(), cardInput.getHealth(), cardInput.getAttackDamage());
-            case "The Cursed One":
-                newCard = new TheCursedOne(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "The Cursed One" -> new TheCursedOne(cardInput.getMana(), cardInput.getDescription(),
+                    cardInput.getColors(),
                         cardInput.getName(), cardInput.getHealth(), cardInput.getAttackDamage());
-                break;
-            case "The Ripper":
-                newCard = new TheRipper(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            case "The Ripper" -> new TheRipper(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName(), cardInput.getHealth(), cardInput.getAttackDamage());
-                break;
-            default:
-                newCard = new Minion(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
+            default -> new Minion(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName(), cardInput.getHealth(), cardInput.getAttackDamage());
-        }
+        };
+    }
 
-        return newCard;
+    public static Card getCardDeep(Card card) {
+        return switch (card.getName()) {
+            case "Firestorm" -> new Firestorm(card);
+            case "Heart Hound" -> new HeartHound(card);
+            case "Winterfell" -> new Winterfell(card);
+            case "Empress Thorina" -> new EmpressThorina(card);
+            case "General Kocioraw" -> new GeneralKocioraw(card);
+            case "King Mudface" -> new KingMudface(card);
+            case "Lord Royce" -> new LordRoyce(card);
+            case "Miraj" -> new Miraj(card);
+            case "Disciple" -> new Disciple(card);
+            case "The Cursed One" -> new TheCursedOne(card);
+            case "The Ripper" -> new TheRipper(card);
+            default -> new Minion(card);
+        };
     }
 
     public static ArrayList<ArrayList<Card>> getDecks(DecksInput decksInput) {
@@ -94,17 +99,21 @@ public class Helpers {
 
     public static void loadStartGame(Table table, StartGameInput startGame) {
         table.setTable(new ArrayList<>());
+        table.getTable().add(new ArrayList<>());
+        table.getTable().add(new ArrayList<>());
+        table.getTable().add(new ArrayList<>());
+        table.getTable().add(new ArrayList<>());
 
         table.getPlayer1().setHero((Hero)getCard(startGame.getPlayerOneHero()));
         table.getPlayer2().setHero((Hero)getCard(startGame.getPlayerTwoHero()));
 
-        ArrayList<Card> deck1 = new ArrayList<>(table.getPlayer1().getDecks().get(startGame.getPlayerOneDeckIdx()));
+        ArrayList<Card> deck1 = getDeepCopy(table.getPlayer1().getDecks().get(startGame.getPlayerOneDeckIdx()));
         Collections.shuffle(deck1, new Random(startGame.getShuffleSeed()));
-        ArrayList<Card> deck2 = new ArrayList<>(table.getPlayer2().getDecks().get(startGame.getPlayerTwoDeckIdx()));
+        ArrayList<Card> deck2 = getDeepCopy(table.getPlayer2().getDecks().get(startGame.getPlayerTwoDeckIdx()));
         Collections.shuffle(deck2, new Random(startGame.getShuffleSeed()));
 
-        table.getPlayer1().setCurrentDeck(new ArrayList<>(deck1));
-        table.getPlayer2().setCurrentDeck(new ArrayList<>(deck2));
+        table.getPlayer1().setCurrentDeck(deck1);
+        table.getPlayer2().setCurrentDeck(deck2);
 
         table.getPlayer1().setHand(new ArrayList<>());
         table.getPlayer1().getHand().add(table.getPlayer1().getCurrentDeck().get(0));
@@ -129,7 +138,32 @@ public class Helpers {
             case "placeCard" -> new PlaceCard(actionInput.getCommand(), actionInput.getHandIdx());
             case "getCardsInHand" -> new GetCardsInHand(actionInput.getCommand(), actionInput.getPlayerIdx());
             case "getPlayerMana" -> new GetPlayerMana(actionInput.getCommand(), actionInput.getPlayerIdx());
-            default -> null;
+            case "getCardsOnTable" -> new GetCardsOnTable(actionInput.getCommand());
+            default -> new EndPlayerTurn(actionInput.getCommand());
+        };
+    }
+
+    public static ArrayList<Card> getDeepCopy(ArrayList<Card> deck) {
+        ArrayList<Card> newDeck = new ArrayList<>();
+
+        for (Card card : deck)
+            newDeck.add(getCardDeep(card));
+
+        return newDeck;
+    }
+
+    public static ArrayList<ArrayList<Card>> getDeepCopyTable(ArrayList<ArrayList<Card>> table) {
+        ArrayList<ArrayList<Card>> newTable = new ArrayList<>();
+        for (ArrayList<Card> row : table)
+            newTable.add(getDeepCopy(row));
+
+        return newTable;
+    }
+
+    public static boolean isEnvironment(Card card) {
+        return switch(card.getName()) {
+            case "Firestorm", "Heart Hound", "Winterfell" -> true;
+            default -> false;
         };
     }
 }

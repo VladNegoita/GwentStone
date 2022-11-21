@@ -1,5 +1,7 @@
 package cards.HeroCards;
 
+import cards.Card;
+
 import java.util.ArrayList;
 
 public class LordRoyce extends Hero {
@@ -70,5 +72,9 @@ public class LordRoyce extends Hero {
     @Override
     public void setName(String name) {
         super.setName(name);
+    }
+
+    public LordRoyce(Card other) {
+        super(other);
     }
 }

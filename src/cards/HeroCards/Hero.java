@@ -75,4 +75,10 @@ public abstract class Hero extends Card implements Ability {
     public void setName(String name) {
         super.setName(name);
     }
+
+    public Hero(Card other) {
+        super(other);
+        this.health = ((Hero)other).getHealth();
+        this.used = ((Hero)other).isUsed();
+    }
 }
