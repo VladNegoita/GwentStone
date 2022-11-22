@@ -29,10 +29,11 @@ public final class GetPlayerHero extends Action {
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());
         output.put("playerIdx", this.playerIdx);
-        if (playerIdx == 1)
+        if (playerIdx == 1) {
             output.putPOJO("output", Helpers.getCardDeep(table.getPlayer1().getHero()));
-        else
+        } else {
             output.putPOJO("output", Helpers.getCardDeep(table.getPlayer2().getHero()));
+        }
 
         return output;
     }

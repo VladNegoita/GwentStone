@@ -1,6 +1,7 @@
 package main;
 
 import actions.Action;
+import cards.MinionCards.LoadNewGame;
 import checker.Checker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -84,14 +85,15 @@ public final class Main {
 
         // start games
         for (GameInput gameInput : inputData.getGames()) {
-            Helpers.loadStartGame(table, gameInput.getStartGame());
+            LoadNewGame.loadStartGame(table, gameInput.getStartGame());
 
             for (ActionsInput actionInput : gameInput.getActions()) {
                 Action action = Helpers.getAction(actionInput);
 
                 ObjectNode objectNode = action.apply(table);
-                if (objectNode != null)
+                if (objectNode != null) {
                     output.add(objectNode);
+                }
 
                 table.refresh();
             }

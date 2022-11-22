@@ -24,7 +24,7 @@ public final class GetPlayerTurn extends Action {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());
-        output.putPOJO("output", table.getCurrentPlayer());
+        output.putPOJO("output", table.getCurrentPlayerIdx());
 
         return output;
     }

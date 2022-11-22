@@ -7,7 +7,8 @@ import main.Table;
 import java.util.ArrayList;
 
 public final class GeneralKocioraw extends Hero {
-    public GeneralKocioraw(final int mana, final String description, final ArrayList<String> colors, final String name) {
+    public GeneralKocioraw(final int mana, final String description, final ArrayList<String> colors,
+                           final String name) {
         super(mana, description, colors, name);
     }
 
@@ -33,8 +34,9 @@ public final class GeneralKocioraw extends Hero {
 
     @Override
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
-        for (Card card : table.getTable().get(affectedRow))
+        for (Card card : table.getTable().get(affectedRow)) {
             ((Minion) card).setAttackDamage(((Minion) card).getAttackDamage() + 1);
+        }
     }
 
     @Override

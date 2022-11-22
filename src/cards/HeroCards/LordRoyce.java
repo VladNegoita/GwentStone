@@ -7,7 +7,8 @@ import main.Table;
 import java.util.ArrayList;
 
 public final class LordRoyce extends Hero {
-    public LordRoyce(final int mana, final String description, final ArrayList<String> colors, final String name) {
+    public LordRoyce(final int mana, final String description, final ArrayList<String> colors,
+                     final String name) {
         super(mana, description, colors, name);
     }
 
@@ -22,12 +23,14 @@ public final class LordRoyce extends Hero {
     }
 
     @Override
-    public void specialAbility(final Table table, final int affectedRow,  final int affectedColumn) {
+    public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
         Minion cardMaxAttack = (Minion) table.getTable().get(affectedRow).get(0);
 
-        for (Card card : table.getTable().get(affectedRow))
-            if (((Minion) card).getAttackDamage() > cardMaxAttack.getAttackDamage())
+        for (Card card : table.getTable().get(affectedRow)) {
+            if (((Minion) card).getAttackDamage() > cardMaxAttack.getAttackDamage()) {
                 cardMaxAttack = (Minion) card;
+            }
+        }
 
         cardMaxAttack.setFrozen(true);
     }

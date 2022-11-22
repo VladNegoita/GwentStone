@@ -1,14 +1,11 @@
 package actions;
 
-import cards.Card;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.Helpers;
 import main.Table;
 
-import java.util.ArrayList;
-
-public class GetCardsOnTable extends Action {
+public final class GetCardsOnTable extends Action {
 
     @Override
     public String getCommand() {

@@ -35,7 +35,7 @@ public final class GetCardAtPosition extends Action {
         super.setCommand(command);
     }
 
-    public GetCardAtPosition(final String command, int x, int y) {
+    public GetCardAtPosition(final String command, final int x, final int y) {
         super(command);
         this.x = x;
         this.y = y;
@@ -49,10 +49,11 @@ public final class GetCardAtPosition extends Action {
         output.put("x", this.x);
         output.put("y", this.y);
 
-        if (table.getTable().get(x).size() <= this.y)
+        if (table.getTable().get(x).size() <= this.y) {
             output.put("output", "No card available at that position.");
-        else
+        } else {
             output.putPOJO("output", Helpers.getCardDeep(table.getTable().get(x).get(y)));
+        }
 
         return output;
     }

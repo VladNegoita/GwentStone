@@ -7,14 +7,16 @@ import main.Table;
 import java.util.ArrayList;
 
 public final class Winterfell extends Environment {
-    public Winterfell(final int mana, final String description, final ArrayList<String> colors, final String name) {
+    public Winterfell(final int mana, final String description, final ArrayList<String> colors,
+                      final String name) {
         super(mana, description, colors, name);
     }
 
     @Override
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
-        for (Card card : table.getTable().get(affectedRow))
-            ((Minion)card).setFrozen(true);
+        for (Card card : table.getTable().get(affectedRow)) {
+            ((Minion) card).setFrozen(true);
+        }
     }
 
     @Override

@@ -28,10 +28,11 @@ public final class GetCardsInHand extends Action {
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());
         output.put("playerIdx", this.playerIdx);
-        if (playerIdx == 1)
+        if (playerIdx == 1) {
             output.putPOJO("output", Helpers.getDeepCopy(table.getPlayer1().getHand()));
-        else
+        } else {
             output.putPOJO("output", Helpers.getDeepCopy(table.getPlayer2().getHand()));
+        }
 
         return output;
     }

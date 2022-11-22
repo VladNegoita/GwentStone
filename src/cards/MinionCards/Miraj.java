@@ -5,9 +5,9 @@ import main.Table;
 
 import java.util.ArrayList;
 
-public class Miraj extends SpecialAbilityMinion {
-    public Miraj(final int mana, final String description, final ArrayList<String> colors, final String name,
-                 final int health, final int attackDamage) {
+public final class Miraj extends SpecialAbilityMinion {
+    public Miraj(final int mana, final String description, final ArrayList<String> colors,
+                 final String name, final int health, final int attackDamage) {
         super(mana, description, colors, name, health, attackDamage);
     }
 
@@ -23,7 +23,7 @@ public class Miraj extends SpecialAbilityMinion {
 
     @Override
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
-        Minion attacked = (Minion)table.getTable().get(affectedRow).get(affectedColumn);
+        Minion attacked = (Minion) table.getTable().get(affectedRow).get(affectedColumn);
         int aux = this.getHealth();
         this.setHealth(attacked.getHealth());
         attacked.setHealth(aux);

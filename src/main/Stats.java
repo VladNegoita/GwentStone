@@ -17,19 +17,32 @@ public final class Stats {
         return playerTwoWins;
     }
 
-    public static void PlayerOneWon() {
+    /**
+     * Method that should be called in case player one won a game
+     */
+    public static void playerOneWon() {
         gamesPlayed += 1;
         playerOneWins += 1;
     }
 
-    public static void PlayerTwoWon() {
+    /**
+     * Method that should be called in case player two won a game
+     */
+    public static void playerTwoWon() {
         gamesPlayed += 1;
         playerTwoWins += 1;
     }
 
+    /**
+     *
+     */
     public static void resetStats() {
         gamesPlayed = 0;
         playerOneWins = 0;
         playerTwoWins = 0;
+    }
+
+    private Stats() {
+
     }
 }

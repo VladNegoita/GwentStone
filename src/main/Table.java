@@ -9,8 +9,8 @@ import static java.lang.Integer.min;
 
 public final class Table {
     private Player player1, player2;
-    ArrayList<ArrayList<Card>> table;
-    private int currentPlayer;
+    private ArrayList<ArrayList<Card>> table;
+    private int currentPlayerIdx;
     private int endedTurns, currentRound;
 
     public int getCurrentRound() {
@@ -29,12 +29,12 @@ public final class Table {
         this.endedTurns = endedTurns;
     }
 
-    public int getCurrentPlayer() {
-        return currentPlayer;
+    public int getCurrentPlayerIdx() {
+        return currentPlayerIdx;
     }
 
-    public void setCurrentPlayer(final int currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public void setCurrentPlayerIdx(final int currentPlayerIdx) {
+        this.currentPlayerIdx = currentPlayerIdx;
     }
 
     public Player getPlayer1() {
@@ -61,25 +61,35 @@ public final class Table {
         this.table = table;
     }
 
+    /**
+     * refreshes the configuration of the game:
+     *      -> removes dead minions
+     *      -> handles ended turns and rounds, mana receiving
+     */
     public void refresh() {
 
-        for (int row = 0; row < 4; ++row) {
+        for (int row = 0; row < Constants.ROWCOUNT; ++row) {
             ArrayList<Card> toBeRemoved = new ArrayList<>();
 
-            for (Card card : this.getTable().get(row))
-                if (((Minion)card).getHealth() <= 0)
+            for (Card card : this.getTable().get(row)) {
+                if (((Minion) card).getHealth() <= 0) {
                     toBeRemoved.add(card);
+                }
+            }
 
-            for (Card card : toBeRemoved)
+            for (Card card : toBeRemoved) {
                 this.getTable().get(row).remove(card);
+            }
         }
 
         if (this.endedTurns == 2) {
             this.endedTurns = 0;
             this.currentRound += 1;
 
-            this.player1.setMana(this.player1.getMana() + min(this.currentRound, 10));
-            this.player2.setMana(this.player2.getMana() + min(this.currentRound, 10));
+            this.player1.setMana(this.player1.getMana() + min(this.currentRound,
+                    Constants.MAXMANA));
+            this.player2.setMana(this.player2.getMana() + min(this.currentRound,
+                    Constants.MAXMANA));
 
             if (this.player1.getCurrentDeck().size() > 0) {
                 this.player1.getHand().add(this.player1.getCurrentDeck().get(0));

@@ -7,7 +7,8 @@ import main.Table;
 import java.util.ArrayList;
 
 public final class EmpressThorina extends Hero {
-    public EmpressThorina(final int mana, final String description, final ArrayList<String> colors, final String name) {
+    public EmpressThorina(final int mana, final String description, final ArrayList<String> colors,
+                          final String name) {
         super(mana, description, colors, name);
     }
 
@@ -17,7 +18,7 @@ public final class EmpressThorina extends Hero {
     }
 
     @Override
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         super.setHealth(health);
     }
 
@@ -25,9 +26,11 @@ public final class EmpressThorina extends Hero {
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
         Minion cardMaxHealth = (Minion) table.getTable().get(affectedRow).get(0);
 
-        for (Card card : table.getTable().get(affectedRow))
-            if (((Minion) card).getHealth() > cardMaxHealth.getHealth())
+        for (Card card : table.getTable().get(affectedRow)) {
+            if (((Minion) card).getHealth() > cardMaxHealth.getHealth()) {
                 cardMaxHealth = (Minion) card;
+            }
+        }
 
         table.getTable().get(affectedRow).remove(cardMaxHealth);
     }

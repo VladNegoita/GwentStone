@@ -3,6 +3,7 @@ package actions;
 import cards.EnvironmentCards.Environment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.Constants;
 import main.Helpers;
 import main.Player;
 import main.Table;
@@ -11,7 +12,7 @@ public final class UseEnvironmentCard extends Action {
     private int handIdx;
     private int affectedRow;
 
-    public UseEnvironmentCard(final String command, final int handIdx, int affectedRow) {
+    public UseEnvironmentCard(final String command, final int handIdx, final int affectedRow) {
         super(command);
         this.handIdx = handIdx;
         this.affectedRow = affectedRow;
@@ -63,20 +64,24 @@ public final class UseEnvironmentCard extends Action {
             return output;
         }
 
-        if ((table.getCurrentPlayer() == 1 && (this.affectedRow == 2 || this.affectedRow == 3)) ||
-                (table.getCurrentPlayer() == 2 && (this.affectedRow == 0 || this.affectedRow == 1))) {
+        if ((table.getCurrentPlayerIdx() == 1 && this.affectedRow >= Constants.ROWCOUNT / 2)
+                || (table.getCurrentPlayerIdx() == 2
+                && this.affectedRow < Constants.ROWCOUNT / 2)) {
             output.putPOJO("error", "Chosen row does not belong to the enemy.");
             return output;
         }
 
-        if (currentPlayer.getHand().get(this.handIdx).getName().equals("Heart Hound") &&
-                (table.getTable().get(3 - this.affectedRow).size() == 5)) {
+        if (currentPlayer.getHand().get(this.handIdx).getName().equals("Heart Hound")
+                && (table.getTable().get(Constants.ROWCOUNT - 1 - this.affectedRow).size()
+                == Constants.COLUMNCOUNT)) {
             output.putPOJO("error", "Cannot steal enemy card since the player's row is full.");
             return output;
         }
 
-        currentPlayer.setMana(currentPlayer.getMana() - currentPlayer.getHand().get(this.handIdx).getMana());
-        ((Environment)currentPlayer.getHand().get(this.handIdx)).specialAbility(table, this.affectedRow, 0);
+        currentPlayer.setMana(currentPlayer.getMana() - currentPlayer.getHand().get(
+                this.handIdx).getMana());
+        ((Environment) currentPlayer.getHand().get(this.handIdx)).specialAbility(table,
+                this.affectedRow, 0);
         currentPlayer.getHand().remove(this.handIdx);
 
         return null;

@@ -2,11 +2,12 @@ package actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.Constants;
 import main.Helpers;
 import main.Player;
 import main.Table;
 
-public class UseHeroAbility extends Action {
+public final class UseHeroAbility extends Action {
 
     private final int affectedRow;
 
@@ -16,17 +17,17 @@ public class UseHeroAbility extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
-    public UseHeroAbility(String command, int affectedRow) {
+    public UseHeroAbility(final String command, final int affectedRow) {
         super(command);
         this.affectedRow = affectedRow;
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());
@@ -43,16 +44,18 @@ public class UseHeroAbility extends Action {
             return output;
         }
 
-        if (currentPlayer.getHero().getName().equals("Lord Royce") ||
-                currentPlayer.getHero().getName().equals("Empress Thorina")) {
-            if (table.getCurrentPlayer() == 1 && this.affectedRow >= 2 ||
-                    (table.getCurrentPlayer() == 2 && this.affectedRow <= 1)) {
+        if (currentPlayer.getHero().getName().equals("Lord Royce")
+                || currentPlayer.getHero().getName().equals("Empress Thorina")) {
+            if (table.getCurrentPlayerIdx() == 1 && this.affectedRow >= Constants.ROWCOUNT / 2
+                    || (table.getCurrentPlayerIdx() == 2
+                    && this.affectedRow < Constants.ROWCOUNT / 2)) {
                 output.put("error", "Selected row does not belong to the enemy.");
                 return output;
             }
         } else {
-            if (table.getCurrentPlayer() == 1 && this.affectedRow <= 1 ||
-                    (table.getCurrentPlayer() == 2 && this.affectedRow >= 2)) {
+            if (table.getCurrentPlayerIdx() == 1 && this.affectedRow < Constants.ROWCOUNT / 2
+                    || (table.getCurrentPlayerIdx() == 2
+                    && this.affectedRow >= Constants.ROWCOUNT / 2)) {
                 output.put("error", "Selected row does not belong to the current player.");
                 return output;
             }

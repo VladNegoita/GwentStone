@@ -6,8 +6,8 @@ import main.Table;
 import java.util.ArrayList;
 
 public final class TheRipper extends SpecialAbilityMinion {
-    public TheRipper(final int mana, final String description, final ArrayList<String> colors, final String name, final int health,
-                     final int attackDamage) {
+    public TheRipper(final int mana, final String description, final ArrayList<String> colors,
+                     final String name, final int health, final int attackDamage) {
         super(mana, description, colors, name, health, attackDamage);
     }
 
@@ -23,7 +23,7 @@ public final class TheRipper extends SpecialAbilityMinion {
 
     @Override
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
-        Minion attacked = (Minion)table.getTable().get(affectedRow).get(affectedColumn);
+        Minion attacked = (Minion) table.getTable().get(affectedRow).get(affectedColumn);
         attacked.setAttackDamage(attacked.getAttackDamage() - 2);
     }
 

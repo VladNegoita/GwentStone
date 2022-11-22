@@ -42,7 +42,8 @@ public final class UseAttackHero extends Action {
         output.put("command", this.getCommand());
         output.putPOJO("cardAttacker", cardAttacker);
 
-        Minion attacker = (Minion)table.getTable().get(cardAttacker.getX()).get(cardAttacker.getY());
+        Minion attacker = (Minion) table.getTable().get(
+                cardAttacker.getX()).get(cardAttacker.getY());
         if (attacker.isFrozen()) {
             output.put("error", "Attacker card is frozen.");
             return output;
@@ -53,26 +54,27 @@ public final class UseAttackHero extends Action {
             return output;
         }
 
-        if (Helpers.hasTank(table, 3 - table.getCurrentPlayer())) {
+        if (Helpers.hasTank(table, 1 + 2 - table.getCurrentPlayerIdx())) {
             output.put("error", "Attacked card is not of type 'Tank'.");
             return output;
         }
 
-        Hero attackedHero = (table.getCurrentPlayer() == 1 ?
-                table.getPlayer2().getHero() : table.getPlayer1().getHero());
+        Hero attackedHero = (table.getCurrentPlayerIdx() == 1
+                ? table.getPlayer2().getHero() : table.getPlayer1().getHero());
 
         attackedHero.setHealth(attackedHero.getHealth() - attacker.getAttackDamage());
         attacker.setUsed(true);
 
         if (attackedHero.getHealth() <= 0) {
             ObjectNode ending = mapper.createObjectNode();
-            String winner = (table.getCurrentPlayer() == 1 ? "one" : "two");
+            String winner = (table.getCurrentPlayerIdx() == 1 ? "one" : "two");
             ending.put("gameEnded", "Player " + winner + " killed the enemy hero.");
 
-            if (table.getCurrentPlayer() == 1)
-                Stats.PlayerOneWon();
-            else
-                Stats.PlayerTwoWon();
+            if (table.getCurrentPlayerIdx() == 1) {
+                Stats.playerOneWon();
+            } else {
+                Stats.playerTwoWon();
+            }
 
             return ending;
         }

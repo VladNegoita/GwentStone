@@ -28,10 +28,14 @@ public final class GetPlayerDeck extends Action {
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());
         output.put("playerIdx", this.playerIdx);
-        if (playerIdx == 1)
-            output.putPOJO("output", Helpers.getDeepCopy(table.getPlayer1().getCurrentDeck()));
-        else
-            output.putPOJO("output", Helpers.getDeepCopy(table.getPlayer2().getCurrentDeck()));
+
+        if (playerIdx == 1) {
+            output.putPOJO("output", Helpers.getDeepCopy(
+                    table.getPlayer1().getCurrentDeck()));
+        } else {
+            output.putPOJO("output", Helpers.getDeepCopy(
+                    table.getPlayer2().getCurrentDeck()));
+        }
 
         return output;
     }
@@ -42,7 +46,7 @@ public final class GetPlayerDeck extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 }

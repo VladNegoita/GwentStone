@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.Table;
 
-public class GetPlayerMana extends Action {
+public final class GetPlayerMana extends Action {
 
     private int playerIdx;
 
@@ -41,10 +41,11 @@ public class GetPlayerMana extends Action {
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());
         output.put("playerIdx", this.playerIdx);
-        if (playerIdx == 1)
+        if (playerIdx == 1) {
             output.putPOJO("output", table.getPlayer1().getMana());
-        else
+        } else {
             output.putPOJO("output", table.getPlayer2().getMana());
+        }
 
         return output;
     }

@@ -1,6 +1,5 @@
 package actions;
 
-import cards.Card;
 import cards.MinionCards.Minion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -39,7 +38,8 @@ public final class CardUsesAttack extends Action {
         super.setCommand(command);
     }
 
-    public CardUsesAttack(final String command, final Coordinates cardAttacker, final Coordinates cardAttacked) {
+    public CardUsesAttack(final String command, final Coordinates cardAttacker,
+                          final Coordinates cardAttacked) {
         super(command);
         this.cardAttacker = cardAttacker;
         this.cardAttacked = cardAttacked;
@@ -53,10 +53,12 @@ public final class CardUsesAttack extends Action {
         output.putPOJO("cardAttacker", cardAttacker);
         output.putPOJO("cardAttacked", cardAttacked);
 
-        Minion attacked = (Minion)table.getTable().get(cardAttacked.getX()).get(cardAttacked.getY());
-        Minion attacker = (Minion)table.getTable().get(cardAttacker.getX()).get(cardAttacker.getY());
-        if ((table.getCurrentPlayer() == 1 && this.cardAttacked.getX() >= 2) ||
-                (table.getCurrentPlayer() == 2 && this.cardAttacked.getX() <= 1)) {
+        Minion attacked = (Minion) table.getTable().get(cardAttacked.getX()).
+                get(cardAttacked.getY());
+        Minion attacker = (Minion) table.getTable().get(cardAttacker.getX()).
+                get(cardAttacker.getY());
+        if ((table.getCurrentPlayerIdx() == 1 && this.cardAttacked.getX() >= 2)
+                || (table.getCurrentPlayerIdx() == 2 && this.cardAttacked.getX() <= 1)) {
             output.put("error", "Attacked card does not belong to the enemy.");
             return output;
         }
@@ -71,7 +73,8 @@ public final class CardUsesAttack extends Action {
             return output;
         }
 
-        if (Helpers.hasTank(table, 3 - table.getCurrentPlayer()) && !Helpers.isTank(attacked)) {
+        if (Helpers.hasTank(table, Helpers.theOtherPlayerIdx(table.getCurrentPlayerIdx()))
+                && !Helpers.isTank(attacked)) {
             output.put("error", "Attacked card is not of type 'Tank'.");
             return output;
         }

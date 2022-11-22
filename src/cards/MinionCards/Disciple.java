@@ -6,14 +6,14 @@ import main.Table;
 import java.util.ArrayList;
 
 public final class Disciple extends SpecialAbilityMinion {
-    public Disciple(final int mana, final String description, final ArrayList<String> colors, final String name,
-                    final int health, final int attackDamage) {
+    public Disciple(final int mana, final String description, final ArrayList<String> colors,
+                    final String name, final int health, final int attackDamage) {
         super(mana, description, colors, name, health, attackDamage);
     }
 
     @Override
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
-        Minion attacked = (Minion)table.getTable().get(affectedRow).get(affectedColumn);
+        Minion attacked = (Minion) table.getTable().get(affectedRow).get(affectedColumn);
         attacked.setHealth(attacked.getHealth() + 2);
     }
 
@@ -43,7 +43,7 @@ public final class Disciple extends SpecialAbilityMinion {
     }
 
     @Override
-    public void setAttackDamage(int attackDamage) {
+    public void setAttackDamage(final int attackDamage) {
         super.setAttackDamage(attackDamage);
     }
 
@@ -87,7 +87,7 @@ public final class Disciple extends SpecialAbilityMinion {
         super.setName(name);
     }
 
-    public Disciple(Card other) {
+    public Disciple(final Card other) {
         super(other);
     }
 

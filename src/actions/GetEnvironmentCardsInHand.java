@@ -9,7 +9,7 @@ import main.Table;
 
 import java.util.ArrayList;
 
-public class GetEnvironmentCardsInHand extends Action {
+public final class GetEnvironmentCardsInHand extends Action {
     private int playerIdx;
 
     public GetEnvironmentCardsInHand(final String command, final int playerIdx) {
@@ -39,9 +39,11 @@ public class GetEnvironmentCardsInHand extends Action {
     public ObjectNode apply(final Table table) {
         Player currentPlayer = Helpers.getCurrentPlayer(table);
         ArrayList<Card> environmentCardsInHand = new ArrayList<>();
-        for (Card card : currentPlayer.getHand())
-            if (Helpers.isEnvironment(card))
+        for (Card card : currentPlayer.getHand()) {
+            if (Helpers.isEnvironment(card)) {
                 environmentCardsInHand.add(card);
+            }
+        }
 
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();

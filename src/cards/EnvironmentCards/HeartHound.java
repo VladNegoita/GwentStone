@@ -2,24 +2,28 @@ package cards.EnvironmentCards;
 
 import cards.Card;
 import cards.MinionCards.Minion;
+import main.Constants;
 import main.Table;
 
 import java.util.ArrayList;
 
 public final class HeartHound extends Environment {
-    public HeartHound(final int mana, final String description, final ArrayList<String> colors, final String name) {
+    public HeartHound(final int mana, final String description, final ArrayList<String> colors,
+                      final String name) {
         super(mana, description, colors, name);
     }
 
     @Override
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
 
-        Minion minionMaxHealth = (Minion)table.getTable().get(affectedRow).get(0);
-        for (Card card : table.getTable().get(affectedRow))
-            if (((Minion)card).getHealth() > minionMaxHealth.getHealth())
-                minionMaxHealth = (Minion)card;
+        Minion minionMaxHealth = (Minion) table.getTable().get(affectedRow).get(0);
+        for (Card card : table.getTable().get(affectedRow)) {
+            if (((Minion) card).getHealth() > minionMaxHealth.getHealth()) {
+                minionMaxHealth = (Minion) card;
+            }
+        }
 
-        table.getTable().get(3 - affectedRow).add(minionMaxHealth);
+        table.getTable().get(Constants.ROWCOUNT - 1 - affectedRow).add(minionMaxHealth);
         table.getTable().get(affectedRow).remove(minionMaxHealth);
     }
 
@@ -63,7 +67,7 @@ public final class HeartHound extends Environment {
         super.setName(name);
     }
 
-    public HeartHound(Card other) {
+    public HeartHound(final Card other) {
         super(other);
     }
 }

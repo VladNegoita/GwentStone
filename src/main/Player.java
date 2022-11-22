@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public final class Player {
     private Hero hero;
-    private ArrayList <Card> hand;
-    private ArrayList <Card> currentDeck;
-    private ArrayList <ArrayList<Card>> decks;
+    private ArrayList<Card> hand;
+    private ArrayList<Card> currentDeck;
+    private ArrayList<ArrayList<Card>> decks;
     private int mana;
 
     public int getMana() {

@@ -28,10 +28,13 @@ public final class GetFrozenCardsOnTable extends Action {
     @Override
     public ObjectNode apply(final Table table) {
         ArrayList<Card> frozenCards = new ArrayList<>();
-        for (ArrayList<Card> row : table.getTable())
-            for (Card card : row)
-                if (((Minion)card).isFrozen())
+        for (ArrayList<Card> row : table.getTable()) {
+            for (Card card : row) {
+                if (((Minion) card).isFrozen()) {
                     frozenCards.add(card);
+                }
+            }
+        }
 
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();

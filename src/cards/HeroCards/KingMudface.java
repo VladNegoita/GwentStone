@@ -7,7 +7,8 @@ import main.Table;
 import java.util.ArrayList;
 
 public final class KingMudface extends Hero {
-    public KingMudface(final int mana, final String description, final ArrayList<String> colors, final String name) {
+    public KingMudface(final int mana, final String description, final ArrayList<String> colors,
+                       final String name) {
         super(mana, description, colors, name);
     }
 
@@ -23,8 +24,9 @@ public final class KingMudface extends Hero {
 
     @Override
     public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
-        for (Card card : table.getTable().get(affectedRow))
+        for (Card card : table.getTable().get(affectedRow)) {
             ((Minion) card).setHealth(((Minion) card).getHealth() + 1);
+        }
     }
 
     @Override
