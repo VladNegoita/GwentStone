@@ -8,7 +8,7 @@ import main.Table;
 import java.util.ArrayList;
 
 public abstract class Hero extends Card implements Ability {
-    public Hero(int mana, String description, ArrayList<String> colors, String name) {
+    public Hero(final int mana, final String description, final ArrayList<String> colors, final String name) {
         super(mana, description, colors, name);
     }
 
@@ -21,7 +21,7 @@ public abstract class Hero extends Card implements Ability {
         return used;
     }
 
-    public void setUsed(boolean used) {
+    public void setUsed(final boolean used) {
         this.used = used;
     }
 
@@ -29,12 +29,12 @@ public abstract class Hero extends Card implements Ability {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
     }
 
     @Override
-    public abstract void specialAbility(Table table, int affectedRow, int affectedColumn);
+    public abstract void specialAbility(final Table table, final int affectedRow, final int affectedColumn);
 
     @Override
     public int getMana() {
@@ -57,26 +57,26 @@ public abstract class Hero extends Card implements Ability {
     }
 
     @Override
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         super.setMana(mana);
     }
 
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         super.setDescription(description);
     }
 
     @Override
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(final ArrayList<String> colors) {
         super.setColors(colors);
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(final String name) {
         super.setName(name);
     }
 
-    public Hero(Card other) {
+    public Hero(final Card other) {
         super(other);
         this.health = ((Hero)other).getHealth();
         this.used = ((Hero)other).isUsed();

@@ -9,7 +9,7 @@ import main.Table;
 
 import java.util.ArrayList;
 
-public class GetFrozenCardsOnTable extends Action {
+public final class GetFrozenCardsOnTable extends Action {
 
     @Override
     public String getCommand() {
@@ -17,16 +17,16 @@ public class GetFrozenCardsOnTable extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
-    public GetFrozenCardsOnTable(String command) {
+    public GetFrozenCardsOnTable(final String command) {
         super(command);
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         ArrayList<Card> frozenCards = new ArrayList<>();
         for (ArrayList<Card> row : table.getTable())
             for (Card card : row)

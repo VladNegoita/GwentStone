@@ -17,7 +17,7 @@ public final class Table {
         return currentRound;
     }
 
-    public void setCurrentRound(int currentRound) {
+    public void setCurrentRound(final int currentRound) {
         this.currentRound = currentRound;
     }
 
@@ -25,7 +25,7 @@ public final class Table {
         return endedTurns;
     }
 
-    public void setEndedTurns(int endedTurns) {
+    public void setEndedTurns(final int endedTurns) {
         this.endedTurns = endedTurns;
     }
 
@@ -33,7 +33,7 @@ public final class Table {
         return currentPlayer;
     }
 
-    public void setCurrentPlayer(int currentPlayer) {
+    public void setCurrentPlayer(final int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
@@ -41,7 +41,7 @@ public final class Table {
         return player1;
     }
 
-    public void setPlayer1(Player player1) {
+    public void setPlayer1(final Player player1) {
         this.player1 = player1;
     }
 
@@ -49,7 +49,7 @@ public final class Table {
         return player2;
     }
 
-    public void setPlayer2(Player player2) {
+    public void setPlayer2(final Player player2) {
         this.player2 = player2;
     }
 
@@ -57,7 +57,7 @@ public final class Table {
         return table;
     }
 
-    public void setTable(ArrayList<ArrayList<Card>> table) {
+    public void setTable(final ArrayList<ArrayList<Card>> table) {
         this.table = table;
     }
 

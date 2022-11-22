@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GetEnvironmentCardsInHand extends Action {
     private int playerIdx;
 
-    public GetEnvironmentCardsInHand(String command, int playerIdx) {
+    public GetEnvironmentCardsInHand(final String command, final int playerIdx) {
         super(command);
         this.playerIdx = playerIdx;
     }
@@ -23,7 +23,7 @@ public class GetEnvironmentCardsInHand extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
@@ -31,12 +31,12 @@ public class GetEnvironmentCardsInHand extends Action {
         return playerIdx;
     }
 
-    public void setPlayerIdx(int playerIdx) {
+    public void setPlayerIdx(final int playerIdx) {
         this.playerIdx = playerIdx;
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         Player currentPlayer = Helpers.getCurrentPlayer(table);
         ArrayList<Card> environmentCardsInHand = new ArrayList<>();
         for (Card card : currentPlayer.getHand())

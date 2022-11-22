@@ -1,6 +1,25 @@
 package main;
 
-import actions.*;
+import actions.Action;
+import actions.CardUsesAbility;
+import actions.CardUsesAttack;
+import actions.EndPlayerTurn;
+import actions.GetCardAtPosition;
+import actions.GetCardsInHand;
+import actions.GetCardsOnTable;
+import actions.GetEnvironmentCardsInHand;
+import actions.GetFrozenCardsOnTable;
+import actions.GetPlayerDeck;
+import actions.GetPlayerHero;
+import actions.GetPlayerMana;
+import actions.GetPlayerOneWins;
+import actions.GetPlayerTurn;
+import actions.GetPlayerTwoWins;
+import actions.GetTotalGamesPlayed;
+import actions.PlaceCard;
+import actions.UseAttackHero;
+import actions.UseEnvironmentCard;
+import actions.UseHeroAbility;
 import cards.Card;
 import cards.EnvironmentCards.Firestorm;
 import cards.EnvironmentCards.HeartHound;
@@ -20,13 +39,12 @@ import fileio.CardInput;
 import fileio.DecksInput;
 import fileio.StartGameInput;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public final class Helpers {
-    public static Card getCard(CardInput cardInput) {
+    public static Card getCard(final CardInput cardInput) {
         return switch (cardInput.getName()) {
             case "Firestorm" -> new Firestorm(cardInput.getMana(), cardInput.getDescription(), cardInput.getColors(),
                         cardInput.getName());
@@ -60,7 +78,7 @@ public final class Helpers {
         };
     }
 
-    public static Card getCardDeep(Card card) {
+    public static Card getCardDeep(final Card card) {
         return switch (card.getName()) {
             case "Firestorm" -> new Firestorm(card);
             case "Heart Hound" -> new HeartHound(card);
@@ -77,7 +95,7 @@ public final class Helpers {
         };
     }
 
-    public static ArrayList<ArrayList<Card>> getDecks(DecksInput decksInput) {
+    public static ArrayList<ArrayList<Card>> getDecks(final DecksInput decksInput) {
         ArrayList<ArrayList<Card>> decks = new ArrayList<>();
         for (int i = 0; i < decksInput.getNrDecks(); ++i) {
             decks.add(new ArrayList<>());
@@ -89,7 +107,7 @@ public final class Helpers {
         return decks;
     }
 
-    public static void loadStartGame(Table table, StartGameInput startGame) {
+    public static void loadStartGame(final Table table, final StartGameInput startGame) {
         table.setTable(new ArrayList<>());
         table.getTable().add(new ArrayList<>());
         table.getTable().add(new ArrayList<>());
@@ -123,7 +141,7 @@ public final class Helpers {
         table.getPlayer2().setMana(1);
     }
 
-    public static Action getAction(ActionsInput actionInput) {
+    public static Action getAction(final ActionsInput actionInput) {
 
         return switch (actionInput.getCommand()) {
             case "getPlayerDeck" -> new GetPlayerDeck(actionInput.getCommand(), actionInput.getPlayerIdx());
@@ -154,7 +172,7 @@ public final class Helpers {
         };
     }
 
-    public static ArrayList<Card> getDeepCopy(ArrayList<Card> deck) {
+    public static ArrayList<Card> getDeepCopy(final ArrayList<Card> deck) {
         ArrayList<Card> newDeck = new ArrayList<>();
 
         for (Card card : deck)
@@ -163,7 +181,7 @@ public final class Helpers {
         return newDeck;
     }
 
-    public static ArrayList<ArrayList<Card>> getDeepCopyTable(ArrayList<ArrayList<Card>> table) {
+    public static ArrayList<ArrayList<Card>> getDeepCopyTable(final ArrayList<ArrayList<Card>> table) {
         ArrayList<ArrayList<Card>> newTable = new ArrayList<>();
         for (ArrayList<Card> row : table)
             newTable.add(getDeepCopy(row));
@@ -171,25 +189,25 @@ public final class Helpers {
         return newTable;
     }
 
-    public static boolean isEnvironment(Card card) {
+    public static boolean isEnvironment(final Card card) {
         return switch(card.getName()) {
             case "Firestorm", "Heart Hound", "Winterfell" -> true;
             default -> false;
         };
     }
 
-    public static Player getCurrentPlayer(Table table) {
+    public static Player getCurrentPlayer(final Table table) {
         return (table.getCurrentPlayer() == 1 ? table.getPlayer1() : table.getPlayer2());
     }
 
-    public static boolean isTank(Card card) {
+    public static boolean isTank(final Card card) {
         return switch (card.getName()) {
             case "Goliath", "Warden" -> true;
             default -> false;
         };
     }
 
-    public static boolean hasTank(Table table, int playerIdx) {
+    public static boolean hasTank(final Table table, final int playerIdx) {
         int left, right;
         if (playerIdx == 1) {
             left = 2;

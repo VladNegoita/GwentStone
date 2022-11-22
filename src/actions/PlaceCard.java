@@ -7,10 +7,10 @@ import main.Helpers;
 import main.Player;
 import main.Table;
 
-public class PlaceCard extends Action {
+public final class PlaceCard extends Action {
 
     private int handIdx;
-    public PlaceCard(String command, int handIdx) {
+    public PlaceCard(final String command, final int handIdx) {
         super(command);
         this.handIdx = handIdx;
     }
@@ -19,7 +19,7 @@ public class PlaceCard extends Action {
         return handIdx;
     }
 
-    public void setHandIdx(int handIdx) {
+    public void setHandIdx(final int handIdx) {
         this.handIdx = handIdx;
     }
 
@@ -29,11 +29,11 @@ public class PlaceCard extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
-    private int getCorrespondingLine(Card card, int currentPlayer) {
+    private int getCorrespondingLine(final Card card, final int currentPlayer) {
 
         int correspondingLine = switch(card.getName()) {
             case "Sentinel", "Berserker", "The Cursed One", "Disciple" -> 0;
@@ -48,7 +48,7 @@ public class PlaceCard extends Action {
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());

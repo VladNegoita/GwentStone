@@ -6,13 +6,13 @@ import main.Table;
 
 import java.util.ArrayList;
 
-public class HeartHound extends Environment {
-    public HeartHound(int mana, String description, ArrayList<String> colors, String name) {
+public final class HeartHound extends Environment {
+    public HeartHound(final int mana, final String description, final ArrayList<String> colors, final String name) {
         super(mana, description, colors, name);
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+    public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
 
         Minion minionMaxHealth = (Minion)table.getTable().get(affectedRow).get(0);
         for (Card card : table.getTable().get(affectedRow))
@@ -44,22 +44,22 @@ public class HeartHound extends Environment {
     }
 
     @Override
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         super.setMana(mana);
     }
 
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         super.setDescription(description);
     }
 
     @Override
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(final ArrayList<String> colors) {
         super.setColors(colors);
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(final String name) {
         super.setName(name);
     }
 

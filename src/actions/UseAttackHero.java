@@ -9,10 +9,10 @@ import main.Helpers;
 import main.Stats;
 import main.Table;
 
-public class UseAttackHero extends Action {
+public final class UseAttackHero extends Action {
     private Coordinates cardAttacker;
 
-    public UseAttackHero(String command, Coordinates cardAttacker) {
+    public UseAttackHero(final String command, final Coordinates cardAttacker) {
         super(command);
         this.cardAttacker = cardAttacker;
     }
@@ -23,7 +23,7 @@ public class UseAttackHero extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
@@ -31,12 +31,12 @@ public class UseAttackHero extends Action {
         return cardAttacker;
     }
 
-    public void setCardAttacker(Coordinates cardAttacker) {
+    public void setCardAttacker(final Coordinates cardAttacker) {
         this.cardAttacker = cardAttacker;
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());

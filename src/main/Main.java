@@ -80,6 +80,7 @@ public final class Main {
         table.setPlayer2(new Player());
         table.getPlayer1().setDecks(Helpers.getDecks(inputData.getPlayerOneDecks()));
         table.getPlayer2().setDecks(Helpers.getDecks(inputData.getPlayerTwoDecks()));
+        Stats.resetStats();
 
         // start games
         for (GameInput gameInput : inputData.getGames()) {

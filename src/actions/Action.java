@@ -6,7 +6,7 @@ import main.Table;
 public abstract class Action {
     private String command;
 
-    public Action(String command) {
+    public Action(final String command) {
         this.command = command;
     }
 
@@ -14,9 +14,9 @@ public abstract class Action {
         return command;
     }
 
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         this.command = command;
     }
 
-    public abstract ObjectNode apply(Table table);
+    public abstract ObjectNode apply(final Table table);
 }

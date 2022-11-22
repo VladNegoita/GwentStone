@@ -5,11 +5,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.Helpers;
 import main.Table;
 
-public class GetPlayerDeck extends Action {
+public final class GetPlayerDeck extends Action {
 
     private int playerIdx;
 
-    public GetPlayerDeck(String command, int playerIdx) {
+    public GetPlayerDeck(final String command, final int playerIdx) {
         super(command);
         this.playerIdx = playerIdx;
     }
@@ -18,12 +18,12 @@ public class GetPlayerDeck extends Action {
         return playerIdx;
     }
 
-    public void setPlayerIdx(int playerIdx) {
+    public void setPlayerIdx(final int playerIdx) {
         this.playerIdx = playerIdx;
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());

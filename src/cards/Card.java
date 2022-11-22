@@ -3,7 +3,7 @@ package cards;
 import java.util.ArrayList;
 
 public abstract class Card {
-    public Card(int mana, String description, ArrayList<String> colors, String name) {
+    public Card(final int mana, final String description, final ArrayList<String> colors, final String name) {
         this.mana = mana;
         this.description = description;
         this.colors = colors;
@@ -19,7 +19,7 @@ public abstract class Card {
         return mana;
     }
 
-    public Card(Card other) {
+    public Card(final Card other) {
         this.mana = other.mana;
         this.description = new String(other.description);
         this.name = new String(other.name);
@@ -40,19 +40,19 @@ public abstract class Card {
         return name;
     }
 
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(final ArrayList<String> colors) {
         this.colors = colors;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 }

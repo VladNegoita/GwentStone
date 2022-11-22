@@ -7,11 +7,11 @@ import main.Helpers;
 import main.Player;
 import main.Table;
 
-public class UseEnvironmentCard extends Action {
+public final class UseEnvironmentCard extends Action {
     private int handIdx;
     private int affectedRow;
 
-    public UseEnvironmentCard(String command, int handIdx, int affectedRow) {
+    public UseEnvironmentCard(final String command, final int handIdx, int affectedRow) {
         super(command);
         this.handIdx = handIdx;
         this.affectedRow = affectedRow;
@@ -21,7 +21,7 @@ public class UseEnvironmentCard extends Action {
         return handIdx;
     }
 
-    public void setHandIdx(int handIdx) {
+    public void setHandIdx(final int handIdx) {
         this.handIdx = handIdx;
     }
 
@@ -29,7 +29,7 @@ public class UseEnvironmentCard extends Action {
         return affectedRow;
     }
 
-    public void setAffectedRow(int affectedRow) {
+    public void setAffectedRow(final int affectedRow) {
         this.affectedRow = affectedRow;
     }
 
@@ -39,12 +39,12 @@ public class UseEnvironmentCard extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         Player currentPlayer = Helpers.getCurrentPlayer(table);
 
         final ObjectMapper mapper = new ObjectMapper();

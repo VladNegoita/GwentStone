@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.Helpers;
 import main.Table;
 
-public class GetCardAtPosition extends Action {
+public final class GetCardAtPosition extends Action {
     private int x;
     private int y;
 
@@ -13,7 +13,7 @@ public class GetCardAtPosition extends Action {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(final int x) {
         this.x = x;
     }
 
@@ -21,7 +21,7 @@ public class GetCardAtPosition extends Action {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y;
     }
 
@@ -31,18 +31,18 @@ public class GetCardAtPosition extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
-    public GetCardAtPosition(String command, int x, int y) {
+    public GetCardAtPosition(final String command, int x, int y) {
         super(command);
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());

@@ -7,9 +7,9 @@ import main.Table;
 
 import java.util.ArrayList;
 
-public class EndPlayerTurn extends Action {
+public final class EndPlayerTurn extends Action {
 
-    public EndPlayerTurn(String command) {
+    public EndPlayerTurn(final String command) {
         super(command);
     }
 
@@ -19,12 +19,12 @@ public class EndPlayerTurn extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         int left, right;
 
         if (table.getCurrentPlayer() == 1) {

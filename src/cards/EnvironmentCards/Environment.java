@@ -7,11 +7,11 @@ import main.Table;
 import java.util.ArrayList;
 
 public abstract class Environment extends Card implements Ability {
-    public Environment(int mana, String description, ArrayList<String> colors, String name) {
+    public Environment(final int mana, final String description, final ArrayList<String> colors, final String name) {
         super(mana, description, colors, name);
     }
     @Override
-    public abstract void specialAbility(Table table, int affectedRow, int affectedColumn);
+    public abstract void specialAbility(final Table table, final int affectedRow,  final int affectedColumn);
 
     @Override
     public int getMana() {
@@ -39,21 +39,21 @@ public abstract class Environment extends Card implements Ability {
     }
 
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         super.setDescription(description);
     }
 
     @Override
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(final ArrayList<String> colors) {
         super.setColors(colors);
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(final String name) {
         super.setName(name);
     }
 
-    public Environment(Card other) {
+    public Environment(final Card other) {
         super(other);
     }
 }

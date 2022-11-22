@@ -16,7 +16,7 @@ public final class Player {
         return mana;
     }
 
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
@@ -24,7 +24,7 @@ public final class Player {
         return currentDeck;
     }
 
-    public void setCurrentDeck(ArrayList<Card> currentDeck) {
+    public void setCurrentDeck(final ArrayList<Card> currentDeck) {
         this.currentDeck = currentDeck;
     }
 
@@ -33,7 +33,7 @@ public final class Player {
         return hand;
     }
 
-    public void setHand(ArrayList<Card> hand) {
+    public void setHand(final ArrayList<Card> hand) {
         this.hand = hand;
     }
 
@@ -41,7 +41,7 @@ public final class Player {
         return decks;
     }
 
-    public void setDecks(ArrayList<ArrayList<Card>> decks) {
+    public void setDecks(final ArrayList<ArrayList<Card>> decks) {
         this.decks = decks;
     }
 
@@ -49,7 +49,7 @@ public final class Player {
         return hero;
     }
 
-    public void setHero(Hero hero) {
+    public void setHero(final Hero hero) {
         this.hero = hero;
     }
 }

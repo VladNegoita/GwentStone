@@ -9,7 +9,7 @@ public class Minion extends Card {
     private int health;
     private int attackDamage;
 
-    public Minion(int mana, String description, ArrayList<String> colors, String name, int health, int attackDamage) {
+    public Minion(final int mana, final String description, final ArrayList<String> colors, final String name, final int health, final int attackDamage) {
         super(mana, description, colors, name);
         this.health = health;
         this.attackDamage = attackDamage;
@@ -19,7 +19,7 @@ public class Minion extends Card {
         return used;
     }
 
-    public void setUsed(boolean used) {
+    public void setUsed(final boolean used) {
         this.used = used;
     }
 
@@ -29,7 +29,7 @@ public class Minion extends Card {
     @JsonIgnore
     private boolean frozen = false;
 
-    public Minion(Card other) {
+    public Minion(final Card other) {
         super(other);
         this.health = ((Minion)other).getHealth();
         this.attackDamage = ((Minion)other).getAttackDamage();
@@ -41,7 +41,7 @@ public class Minion extends Card {
         return frozen;
     }
 
-    public void setFrozen(boolean frozen) {
+    public void setFrozen(final boolean frozen) {
         this.frozen = frozen;
     }
 
@@ -49,7 +49,7 @@ public class Minion extends Card {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
     }
 
@@ -57,7 +57,7 @@ public class Minion extends Card {
         return attackDamage;
     }
 
-    public void setAttackDamage(int attackDamage) {
+    public void setAttackDamage(final int attackDamage) {
         this.attackDamage = Math.max(attackDamage, 0);
     }
 
@@ -82,22 +82,22 @@ public class Minion extends Card {
     }
 
     @Override
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         super.setMana(mana);
     }
 
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         super.setDescription(description);
     }
 
     @Override
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(final ArrayList<String> colors) {
         super.setColors(colors);
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(final String name) {
         super.setName(name);
     }
 }

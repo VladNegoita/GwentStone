@@ -9,7 +9,7 @@ import fileio.Coordinates;
 import main.Helpers;
 import main.Table;
 
-public class CardUsesAbility extends Action {
+public final class CardUsesAbility extends Action {
 
     private Coordinates cardAttacker;
     private Coordinates cardAttacked;
@@ -18,7 +18,7 @@ public class CardUsesAbility extends Action {
         return cardAttacker;
     }
 
-    public void setCardAttacker(Coordinates cardAttacker) {
+    public void setCardAttacker(final Coordinates cardAttacker) {
         this.cardAttacker = cardAttacker;
     }
 
@@ -26,7 +26,7 @@ public class CardUsesAbility extends Action {
         return cardAttacked;
     }
 
-    public void setCardAttacked(Coordinates cardAttacked) {
+    public void setCardAttacked(final Coordinates cardAttacked) {
         this.cardAttacked = cardAttacked;
     }
 
@@ -36,18 +36,18 @@ public class CardUsesAbility extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
-    public CardUsesAbility(String command, Coordinates cardAttacker, Coordinates cardAttacked) {
+    public CardUsesAbility(final String command, final Coordinates cardAttacker, final Coordinates cardAttacked) {
         super(command);
         this.cardAttacker = cardAttacker;
         this.cardAttacked = cardAttacked;
     }
 
     @Override
-    public ObjectNode apply(Table table) {
+    public ObjectNode apply(final Table table) {
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
         output.put("command", this.getCommand());

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.Stats;
 import main.Table;
 
-public class GetPlayerOneWins extends Action {
+public final class GetPlayerOneWins extends Action {
 
     @Override
     public String getCommand() {
@@ -13,11 +13,11 @@ public class GetPlayerOneWins extends Action {
     }
 
     @Override
-    public void setCommand(String command) {
+    public void setCommand(final String command) {
         super.setCommand(command);
     }
 
-    public GetPlayerOneWins(String command) {
+    public GetPlayerOneWins(final String command) {
         super(command);
     }
 

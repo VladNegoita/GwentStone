@@ -6,8 +6,8 @@ import main.Table;
 
 import java.util.ArrayList;
 
-public class KingMudface extends Hero {
-    public KingMudface(int mana, String description, ArrayList<String> colors, String name) {
+public final class KingMudface extends Hero {
+    public KingMudface(final int mana, final String description, final ArrayList<String> colors, final String name) {
         super(mana, description, colors, name);
     }
 
@@ -17,12 +17,12 @@ public class KingMudface extends Hero {
     }
 
     @Override
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         super.setHealth(health);
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+    public void specialAbility(final Table table, final int affectedRow, final int affectedColumn) {
         for (Card card : table.getTable().get(affectedRow))
             ((Minion) card).setHealth(((Minion) card).getHealth() + 1);
     }
@@ -48,7 +48,7 @@ public class KingMudface extends Hero {
     }
 
     @Override
-    public void setUsed(boolean used) {
+    public void setUsed(final boolean used) {
         super.setUsed(used);
     }
 
@@ -57,27 +57,27 @@ public class KingMudface extends Hero {
         return super.getName();
     }
 
-    public KingMudface(Card other) {
+    public KingMudface(final Card other) {
         super(other);
     }
 
     @Override
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         super.setMana(mana);
     }
 
     @Override
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         super.setDescription(description);
     }
 
     @Override
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(final ArrayList<String> colors) {
         super.setColors(colors);
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(final String name) {
         super.setName(name);
     }
 }

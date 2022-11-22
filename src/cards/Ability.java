@@ -4,5 +4,5 @@ import main.Table;
 
 public interface Ability {
 
-    void specialAbility(Table table, int affectedRow, int affectedColumn);
+    void specialAbility(final Table table, final int affectedRow, final int affectedColumn);
 }
