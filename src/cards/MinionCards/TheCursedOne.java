@@ -22,8 +22,11 @@ public class TheCursedOne extends SpecialAbilityMinion {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
-        // TODO
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+        Minion attacked = (Minion)table.getTable().get(affectedRow).get(affectedColumn);
+        int aux = attacked.getAttackDamage();
+        attacked.setAttackDamage(attacked.getHealth());
+        attacked.setHealth(aux);
     }
 
     @Override

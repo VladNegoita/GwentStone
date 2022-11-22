@@ -110,11 +110,14 @@ public final class Helpers {
         table.getPlayer1().setHand(new ArrayList<>());
         table.getPlayer1().getHand().add(table.getPlayer1().getCurrentDeck().get(0));
         table.getPlayer1().getCurrentDeck().remove(0);
+
         table.getPlayer2().setHand(new ArrayList<>());
         table.getPlayer2().getHand().add(table.getPlayer2().getCurrentDeck().get(0));
         table.getPlayer2().getCurrentDeck().remove(0);
 
         table.setCurrentPlayer(startGame.getStartingPlayer());
+        table.setEndedTurns(0);
+        table.setCurrentRound(1);
 
         table.getPlayer1().setMana(1);
         table.getPlayer2().setMana(1);
@@ -138,6 +141,15 @@ public final class Helpers {
             case "getCardAtPosition" -> new GetCardAtPosition(actionInput.getCommand(), actionInput.getX(),
                     actionInput.getY());
             case "getFrozenCardsOnTable" -> new GetFrozenCardsOnTable(actionInput.getCommand());
+            case "cardUsesAttack" -> new CardUsesAttack(actionInput.getCommand(), actionInput.getCardAttacker(),
+                    actionInput.getCardAttacked());
+            case "cardUsesAbility" -> new CardUsesAbility(actionInput.getCommand(), actionInput.getCardAttacker(),
+                    actionInput.getCardAttacked());
+            case "useAttackHero" -> new UseAttackHero(actionInput.getCommand(), actionInput.getCardAttacker());
+            case "useHeroAbility" -> new UseHeroAbility(actionInput.getCommand(), actionInput.getAffectedRow());
+            case "getTotalGamesPlayed" -> new GetTotalGamesPlayed(actionInput.getCommand());
+            case "getPlayerOneWins" -> new GetPlayerOneWins(actionInput.getCommand());
+            case "getPlayerTwoWins" -> new GetPlayerTwoWins(actionInput.getCommand());
             default -> new EndPlayerTurn(actionInput.getCommand());
         };
     }
@@ -168,5 +180,30 @@ public final class Helpers {
 
     public static Player getCurrentPlayer(Table table) {
         return (table.getCurrentPlayer() == 1 ? table.getPlayer1() : table.getPlayer2());
+    }
+
+    public static boolean isTank(Card card) {
+        return switch (card.getName()) {
+            case "Goliath", "Warden" -> true;
+            default -> false;
+        };
+    }
+
+    public static boolean hasTank(Table table, int playerIdx) {
+        int left, right;
+        if (playerIdx == 1) {
+            left = 2;
+            right = 3;
+        } else {
+            left = 0;
+            right = 1;
+        }
+
+        for (int row = left; row <= right; ++row)
+            for (Card card : table.getTable().get(row))
+                if (isTank(card))
+                    return true;
+
+        return false;
     }
 }

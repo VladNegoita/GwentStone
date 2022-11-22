@@ -11,8 +11,9 @@ public class Disciple extends SpecialAbilityMinion {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
-        // TODO
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+        Minion attacked = (Minion)table.getTable().get(affectedRow).get(affectedColumn);
+        attacked.setHealth(attacked.getHealth() + 2);
     }
 
     @Override

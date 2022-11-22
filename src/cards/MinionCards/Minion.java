@@ -58,7 +58,7 @@ public class Minion extends Card {
     }
 
     public void setAttackDamage(int attackDamage) {
-        this.attackDamage = attackDamage;
+        this.attackDamage = Math.max(attackDamage, 0);
     }
 
     @Override

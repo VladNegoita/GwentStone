@@ -1,6 +1,7 @@
 package cards.HeroCards;
 
 import cards.Card;
+import cards.MinionCards.Minion;
 import main.Table;
 
 import java.util.ArrayList;
@@ -21,8 +22,9 @@ public class KingMudface extends Hero {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
-        // TODO
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+        for (Card card : table.getTable().get(affectedRow))
+            ((Minion) card).setHealth(((Minion) card).getHealth() + 1);
     }
 
     @Override

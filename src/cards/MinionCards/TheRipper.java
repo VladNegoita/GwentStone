@@ -22,8 +22,9 @@ public class TheRipper extends SpecialAbilityMinion {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
-        // TODO
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+        Minion attacked = (Minion)table.getTable().get(affectedRow).get(affectedColumn);
+        attacked.setAttackDamage(attacked.getAttackDamage() - 2);
     }
 
     @Override

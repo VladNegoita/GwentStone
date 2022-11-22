@@ -10,9 +10,8 @@ public abstract class Environment extends Card implements Ability {
     public Environment(int mana, String description, ArrayList<String> colors, String name) {
         super(mana, description, colors, name);
     }
-
     @Override
-    public abstract void specialAbility(Table table, int affectedRow);
+    public abstract void specialAbility(Table table, int affectedRow, int affectedColumn);
 
     @Override
     public int getMana() {

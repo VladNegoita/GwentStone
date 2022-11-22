@@ -30,9 +30,13 @@ public class EndPlayerTurn extends Action {
         if (table.getCurrentPlayer() == 1) {
             left = 2;
             right = 3;
+
+            table.getPlayer1().getHero().setUsed(false);
         } else {
             left = 0;
             right = 1;
+
+            table.getPlayer2().getHero().setUsed(false);
         }
 
         for (int row = left; row <= right; ++row) {

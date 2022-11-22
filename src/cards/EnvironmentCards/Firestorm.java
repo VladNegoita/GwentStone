@@ -12,7 +12,7 @@ public class Firestorm extends Environment {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
         for (Card card : table.getTable().get(affectedRow))
             ((Minion)card).setHealth(((Minion)card).getHealth() - 1);
     }

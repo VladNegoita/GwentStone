@@ -1,6 +1,7 @@
 package cards.HeroCards;
 
 import cards.Card;
+import cards.MinionCards.Minion;
 import main.Table;
 
 import java.util.ArrayList;
@@ -31,8 +32,9 @@ public class GeneralKocioraw extends Hero {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
-        // TODO
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+        for (Card card : table.getTable().get(affectedRow))
+            ((Minion) card).setAttackDamage(((Minion) card).getAttackDamage() + 1);
     }
 
     @Override

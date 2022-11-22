@@ -11,7 +11,15 @@ public final class Table {
     private Player player1, player2;
     ArrayList<ArrayList<Card>> table;
     private int currentPlayer;
-    private int endedTurns = 0, currentRound = 1;
+    private int endedTurns, currentRound;
+
+    public int getCurrentRound() {
+        return currentRound;
+    }
+
+    public void setCurrentRound(int currentRound) {
+        this.currentRound = currentRound;
+    }
 
     public int getEndedTurns() {
         return endedTurns;

@@ -1,6 +1,7 @@
 package cards.HeroCards;
 
 import cards.Card;
+import cards.MinionCards.Minion;
 import main.Table;
 
 import java.util.ArrayList;
@@ -21,8 +22,14 @@ public class EmpressThorina extends Hero {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
-        // TODO
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
+        Minion cardMaxHealth = (Minion) table.getTable().get(affectedRow).get(0);
+
+        for (Card card : table.getTable().get(affectedRow))
+            if (((Minion) card).getHealth() > cardMaxHealth.getHealth())
+                cardMaxHealth = (Minion) card;
+
+        table.getTable().get(affectedRow).remove(cardMaxHealth);
     }
 
     @Override

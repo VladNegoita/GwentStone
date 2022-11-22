@@ -12,7 +12,7 @@ public class HeartHound extends Environment {
     }
 
     @Override
-    public void specialAbility(Table table, int affectedRow) {
+    public void specialAbility(Table table, int affectedRow, int affectedColumn) {
 
         Minion minionMaxHealth = (Minion)table.getTable().get(affectedRow).get(0);
         for (Card card : table.getTable().get(affectedRow))

@@ -76,7 +76,7 @@ public class UseEnvironmentCard extends Action {
         }
 
         currentPlayer.setMana(currentPlayer.getMana() - currentPlayer.getHand().get(this.handIdx).getMana());
-        ((Environment)currentPlayer.getHand().get(this.handIdx)).specialAbility(table, this.affectedRow);
+        ((Environment)currentPlayer.getHand().get(this.handIdx)).specialAbility(table, this.affectedRow, 0);
         currentPlayer.getHand().remove(this.handIdx);
 
         return null;

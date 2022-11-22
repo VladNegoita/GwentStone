@@ -24,7 +24,7 @@ public abstract class SpecialAbilityMinion extends Minion implements Ability {
     }
 
     @Override
-    public abstract void specialAbility(Table table, int affectedRow);
+    public abstract void specialAbility(Table table, int affectedRow, int affectedColumn);
 
     @Override
     public int getHealth() {
