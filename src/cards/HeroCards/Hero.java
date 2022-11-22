@@ -3,6 +3,7 @@ package cards.HeroCards;
 import cards.Ability;
 import cards.Card;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import main.Table;
 
 import java.util.ArrayList;
 
@@ -33,8 +34,7 @@ public abstract class Hero extends Card implements Ability {
     }
 
     @Override
-    public void specialAbility() {
-    }
+    public abstract void specialAbility(Table table, int affectedRow);
 
     @Override
     public int getMana() {

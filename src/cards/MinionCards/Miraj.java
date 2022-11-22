@@ -1,6 +1,7 @@
 package cards.MinionCards;
 
 import cards.Card;
+import main.Table;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class Miraj extends SpecialAbilityMinion {
     }
 
     @Override
-    public void specialAbility() {
+    public void specialAbility(Table table, int affectedRow) {
         // TODO
     }
 

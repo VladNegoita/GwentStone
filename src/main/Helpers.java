@@ -1,14 +1,6 @@
 package main;
 
-import actions.Action;
-import actions.EndPlayerTurn;
-import actions.GetCardsInHand;
-import actions.GetCardsOnTable;
-import actions.GetPlayerDeck;
-import actions.GetPlayerHero;
-import actions.GetPlayerMana;
-import actions.GetPlayerTurn;
-import actions.PlaceCard;
+import actions.*;
 import cards.Card;
 import cards.EnvironmentCards.Firestorm;
 import cards.EnvironmentCards.HeartHound;
@@ -139,6 +131,13 @@ public final class Helpers {
             case "getCardsInHand" -> new GetCardsInHand(actionInput.getCommand(), actionInput.getPlayerIdx());
             case "getPlayerMana" -> new GetPlayerMana(actionInput.getCommand(), actionInput.getPlayerIdx());
             case "getCardsOnTable" -> new GetCardsOnTable(actionInput.getCommand());
+            case "getEnvironmentCardsInHand" -> new GetEnvironmentCardsInHand(actionInput.getCommand(),
+                    actionInput.getPlayerIdx());
+            case "useEnvironmentCard" -> new UseEnvironmentCard(actionInput.getCommand(), actionInput.getHandIdx(),
+                    actionInput.getAffectedRow());
+            case "getCardAtPosition" -> new GetCardAtPosition(actionInput.getCommand(), actionInput.getX(),
+                    actionInput.getY());
+            case "getFrozenCardsOnTable" -> new GetFrozenCardsOnTable(actionInput.getCommand());
             default -> new EndPlayerTurn(actionInput.getCommand());
         };
     }
@@ -165,5 +164,9 @@ public final class Helpers {
             case "Firestorm", "Heart Hound", "Winterfell" -> true;
             default -> false;
         };
+    }
+
+    public static Player getCurrentPlayer(Table table) {
+        return (table.getCurrentPlayer() == 1 ? table.getPlayer1() : table.getPlayer2());
     }
 }

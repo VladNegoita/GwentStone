@@ -1,6 +1,7 @@
 package main;
 
 import cards.Card;
+import cards.MinionCards.Minion;
 
 import java.util.ArrayList;
 
@@ -53,6 +54,18 @@ public final class Table {
     }
 
     public void refresh() {
+
+        for (int row = 0; row < 4; ++row) {
+            ArrayList<Card> toBeRemoved = new ArrayList<>();
+
+            for (Card card : this.getTable().get(row))
+                if (((Minion)card).getHealth() <= 0)
+                    toBeRemoved.add(card);
+
+            for (Card card : toBeRemoved)
+                this.getTable().get(row).remove(card);
+        }
+
         if (this.endedTurns == 2) {
             this.endedTurns = 0;
             this.currentRound += 1;

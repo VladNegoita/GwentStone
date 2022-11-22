@@ -1,6 +1,8 @@
 package cards.EnvironmentCards;
 
 import cards.Card;
+import cards.MinionCards.Minion;
+import main.Table;
 
 import java.util.ArrayList;
 
@@ -10,8 +12,15 @@ public class HeartHound extends Environment {
     }
 
     @Override
-    public void specialAbility() {
-        // TODO
+    public void specialAbility(Table table, int affectedRow) {
+
+        Minion minionMaxHealth = (Minion)table.getTable().get(affectedRow).get(0);
+        for (Card card : table.getTable().get(affectedRow))
+            if (((Minion)card).getHealth() > minionMaxHealth.getHealth())
+                minionMaxHealth = (Minion)card;
+
+        table.getTable().get(3 - affectedRow).add(minionMaxHealth);
+        table.getTable().get(affectedRow).remove(minionMaxHealth);
     }
 
     @Override

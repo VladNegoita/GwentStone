@@ -1,5 +1,6 @@
 package actions;
 
+import cards.EnvironmentCards.Environment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.Helpers;
@@ -44,7 +45,7 @@ public class UseEnvironmentCard extends Action {
 
     @Override
     public ObjectNode apply(Table table) {
-        Player currentPlayer = (table.getCurrentPlayer() == 1 ? table.getPlayer1() : table.getPlayer2());
+        Player currentPlayer = Helpers.getCurrentPlayer(table);
 
         final ObjectMapper mapper = new ObjectMapper();
         ObjectNode output = mapper.createObjectNode();
@@ -68,7 +69,15 @@ public class UseEnvironmentCard extends Action {
             return output;
         }
 
-        if (table)
+        if (currentPlayer.getHand().get(this.handIdx).getName().equals("Heart Hound") &&
+                (table.getTable().get(3 - this.affectedRow).size() == 5)) {
+            output.putPOJO("error", "Cannot steal enemy card since the player's row is full.");
+            return output;
+        }
+
+        currentPlayer.setMana(currentPlayer.getMana() - currentPlayer.getHand().get(this.handIdx).getMana());
+        ((Environment)currentPlayer.getHand().get(this.handIdx)).specialAbility(table, this.affectedRow);
+        currentPlayer.getHand().remove(this.handIdx);
 
         return null;
     }

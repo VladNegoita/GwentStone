@@ -1,6 +1,8 @@
 package cards.EnvironmentCards;
 
 import cards.Card;
+import cards.MinionCards.Minion;
+import main.Table;
 
 import java.util.ArrayList;
 
@@ -10,8 +12,9 @@ public class Winterfell extends Environment {
     }
 
     @Override
-    public void specialAbility() {
-        // TODO
+    public void specialAbility(Table table, int affectedRow) {
+        for (Card card : table.getTable().get(affectedRow))
+            ((Minion)card).setFrozen(true);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package cards.HeroCards;
 
 import cards.Card;
+import main.Table;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class GeneralKocioraw extends Hero {
     }
 
     @Override
-    public void specialAbility() {
+    public void specialAbility(Table table, int affectedRow) {
         // TODO
     }
 

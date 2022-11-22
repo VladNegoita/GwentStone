@@ -54,7 +54,7 @@ public class PlaceCard extends Action {
         output.put("command", this.getCommand());
         output.put("handIdx", this.handIdx);
 
-        Player currentPlayer = (table.getCurrentPlayer() == 1 ? table.getPlayer1() : table.getPlayer2());
+        Player currentPlayer = Helpers.getCurrentPlayer(table);
         if (Helpers.isEnvironment(currentPlayer.getHand().get(handIdx))) {
             output.putPOJO("error", "Cannot place environment card on table.");
             return output;
