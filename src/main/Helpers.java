@@ -1,105 +1,14 @@
 package main;
 
-import actions.Action;
-import actions.CardUsesAbility;
-import actions.CardUsesAttack;
-import actions.EndPlayerTurn;
-import actions.GetCardAtPosition;
-import actions.GetCardsInHand;
-import actions.GetCardsOnTable;
-import actions.GetEnvironmentCardsInHand;
-import actions.GetFrozenCardsOnTable;
-import actions.GetPlayerDeck;
-import actions.GetPlayerHero;
-import actions.GetPlayerMana;
-import actions.GetPlayerOneWins;
-import actions.GetPlayerTurn;
-import actions.GetPlayerTwoWins;
-import actions.GetTotalGamesPlayed;
-import actions.PlaceCard;
-import actions.UseAttackHero;
-import actions.UseEnvironmentCard;
-import actions.UseHeroAbility;
 import cards.Card;
-import cards.EnvironmentCards.Firestorm;
-import cards.EnvironmentCards.HeartHound;
-import cards.EnvironmentCards.Winterfell;
-import cards.HeroCards.EmpressThorina;
-import cards.HeroCards.GeneralKocioraw;
-import cards.HeroCards.KingMudface;
-import cards.HeroCards.LordRoyce;
-import cards.MinionCards.Disciple;
-import cards.MinionCards.Minion;
-import cards.MinionCards.Miraj;
-import cards.MinionCards.TheCursedOne;
-import cards.MinionCards.TheRipper;
-import fileio.ActionsInput;
-import fileio.CardInput;
 import fileio.DecksInput;
 
 import java.util.ArrayList;
 
-public final class Helpers {
-    /**
-     *
-     * @param cardInput Card in CardInput format
-     * @return Card in Card format
-     */
-    public static Card getCard(final CardInput cardInput) {
-        return switch (cardInput.getName()) {
-            case "Firestorm" -> new Firestorm(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName());
-            case "Heart Hound" -> new HeartHound(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName());
-            case "Winterfell" -> new Winterfell(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName());
-            case "Empress Thorina" -> new EmpressThorina(cardInput.getMana(),
-                    cardInput.getDescription(), cardInput.getColors(), cardInput.getName());
-            case "General Kocioraw" -> new GeneralKocioraw(cardInput.getMana(),
-                    cardInput.getDescription(), cardInput.getColors(), cardInput.getName());
-            case "King Mudface" -> new KingMudface(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName());
-            case "Lord Royce" -> new LordRoyce(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName());
-            case "Miraj" -> new Miraj(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName(), cardInput.getHealth(),
-                    cardInput.getAttackDamage());
-            case "Disciple" -> new Disciple(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName(), cardInput.getHealth(),
-                    cardInput.getAttackDamage());
-            case "The Cursed One" -> new TheCursedOne(cardInput.getMana(),
-                    cardInput.getDescription(), cardInput.getColors(),
-                    cardInput.getName(), cardInput.getHealth(), cardInput.getAttackDamage());
-            case "The Ripper" -> new TheRipper(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName(), cardInput.getHealth(),
-                    cardInput.getAttackDamage());
-            default -> new Minion(cardInput.getMana(), cardInput.getDescription(),
-                    cardInput.getColors(), cardInput.getName(), cardInput.getHealth(),
-                    cardInput.getAttackDamage());
-        };
-    }
+import static cards.Card.getCard;
+import static cards.Card.getCardDeepCopy;
 
-    /**
-     *
-     * @param card - card to be copied
-     * @return deep copy of the card
-     */
-    public static Card getCardDeep(final Card card) {
-        return switch (card.getName()) {
-            case "Firestorm" -> new Firestorm(card);
-            case "Heart Hound" -> new HeartHound(card);
-            case "Winterfell" -> new Winterfell(card);
-            case "Empress Thorina" -> new EmpressThorina(card);
-            case "General Kocioraw" -> new GeneralKocioraw(card);
-            case "King Mudface" -> new KingMudface(card);
-            case "Lord Royce" -> new LordRoyce(card);
-            case "Miraj" -> new Miraj(card);
-            case "Disciple" -> new Disciple(card);
-            case "The Cursed One" -> new TheCursedOne(card);
-            case "The Ripper" -> new TheRipper(card);
-            default -> new Minion(card);
-        };
-    }
+public final class Helpers {
 
     /**
      *
@@ -118,51 +27,6 @@ public final class Helpers {
         return decks;
     }
 
-
-
-    /**
-     *
-     * @param actionInput action in ActionsInput format
-     * @return action in Action format
-     */
-    public static Action getAction(final ActionsInput actionInput) {
-
-        return switch (actionInput.getCommand()) {
-            case "getPlayerDeck" -> new GetPlayerDeck(actionInput.getCommand(),
-                    actionInput.getPlayerIdx());
-            case "getPlayerHero" -> new GetPlayerHero(actionInput.getCommand(),
-                    actionInput.getPlayerIdx());
-            case "getPlayerTurn" -> new GetPlayerTurn(actionInput.getCommand());
-            case "endPlayerTurn" -> new EndPlayerTurn(actionInput.getCommand());
-            case "placeCard" -> new PlaceCard(actionInput.getCommand(), actionInput.getHandIdx());
-            case "getCardsInHand" -> new GetCardsInHand(actionInput.getCommand(),
-                    actionInput.getPlayerIdx());
-            case "getPlayerMana" -> new GetPlayerMana(actionInput.getCommand(),
-                    actionInput.getPlayerIdx());
-            case "getCardsOnTable" -> new GetCardsOnTable(actionInput.getCommand());
-            case "getEnvironmentCardsInHand" -> new GetEnvironmentCardsInHand(
-                    actionInput.getCommand(), actionInput.getPlayerIdx());
-            case "useEnvironmentCard" -> new UseEnvironmentCard(actionInput.getCommand(),
-                    actionInput.getHandIdx(), actionInput.getAffectedRow());
-            case "getCardAtPosition" -> new GetCardAtPosition(actionInput.getCommand(),
-                    actionInput.getX(), actionInput.getY());
-            case "getFrozenCardsOnTable" -> new GetFrozenCardsOnTable(
-                    actionInput.getCommand());
-            case "cardUsesAttack" -> new CardUsesAttack(actionInput.getCommand(),
-                    actionInput.getCardAttacker(), actionInput.getCardAttacked());
-            case "cardUsesAbility" -> new CardUsesAbility(actionInput.getCommand(),
-                    actionInput.getCardAttacker(), actionInput.getCardAttacked());
-            case "useAttackHero" -> new UseAttackHero(actionInput.getCommand(),
-                    actionInput.getCardAttacker());
-            case "useHeroAbility" -> new UseHeroAbility(actionInput.getCommand(),
-                    actionInput.getAffectedRow());
-            case "getTotalGamesPlayed" -> new GetTotalGamesPlayed(actionInput.getCommand());
-            case "getPlayerOneWins" -> new GetPlayerOneWins(actionInput.getCommand());
-            case "getPlayerTwoWins" -> new GetPlayerTwoWins(actionInput.getCommand());
-            default -> new EndPlayerTurn(actionInput.getCommand());
-        };
-    }
-
     /**
      *
      * @param deck list of cards
@@ -172,7 +36,7 @@ public final class Helpers {
         ArrayList<Card> newDeck = new ArrayList<>();
 
         for (Card card : deck) {
-            newDeck.add(getCardDeep(card));
+            newDeck.add(getCardDeepCopy(card));
         }
 
         return newDeck;
@@ -195,7 +59,6 @@ public final class Helpers {
 
     /**
      *
-     * @param card
      * @return if the card is environment
      */
     public static boolean isEnvironment(final Card card) {
@@ -216,7 +79,6 @@ public final class Helpers {
 
     /**
      *
-     * @param card
      * @return if the card is a tank
      */
     public static boolean isTank(final Card card) {

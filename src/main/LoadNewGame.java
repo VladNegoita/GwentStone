@@ -1,15 +1,13 @@
-package cards.MinionCards;
+package main;
 
 import cards.Card;
 import cards.HeroCards.Hero;
 import fileio.StartGameInput;
-import main.Table;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import static main.Helpers.getCard;
+import static cards.Card.getCard;
 import static main.Helpers.getDeepCopy;
 
 public final class LoadNewGame {

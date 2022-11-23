@@ -2,8 +2,9 @@ package actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import main.Helpers;
 import main.Table;
+
+import static cards.Card.getCardDeepCopy;
 
 public final class GetPlayerHero extends Action {
     private final int playerIdx;
@@ -30,9 +31,9 @@ public final class GetPlayerHero extends Action {
         output.put("command", this.getCommand());
         output.put("playerIdx", this.playerIdx);
         if (playerIdx == 1) {
-            output.putPOJO("output", Helpers.getCardDeep(table.getPlayer1().getHero()));
+            output.putPOJO("output", getCardDeepCopy(table.getPlayer1().getHero()));
         } else {
-            output.putPOJO("output", Helpers.getCardDeep(table.getPlayer2().getHero()));
+            output.putPOJO("output", getCardDeepCopy(table.getPlayer2().getHero()));
         }
 
         return output;

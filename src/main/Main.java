@@ -1,7 +1,6 @@
 package main;
 
 import actions.Action;
-import cards.MinionCards.LoadNewGame;
 import checker.Checker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+
+import static actions.Action.getAction;
 
 /**
  * The entry point to this homework. It runs the checker that tests your implementation.
@@ -88,7 +89,7 @@ public final class Main {
             LoadNewGame.loadStartGame(table, gameInput.getStartGame());
 
             for (ActionsInput actionInput : gameInput.getActions()) {
-                Action action = Helpers.getAction(actionInput);
+                Action action = getAction(actionInput);
 
                 ObjectNode objectNode = action.apply(table);
                 if (objectNode != null) {

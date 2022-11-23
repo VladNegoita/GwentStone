@@ -2,8 +2,9 @@ package actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import main.Helpers;
 import main.Table;
+
+import static cards.Card.getCardDeepCopy;
 
 public final class GetCardAtPosition extends Action {
     private int x;
@@ -52,7 +53,7 @@ public final class GetCardAtPosition extends Action {
         if (table.getTable().get(x).size() <= this.y) {
             output.put("output", "No card available at that position.");
         } else {
-            output.putPOJO("output", Helpers.getCardDeep(table.getTable().get(x).get(y)));
+            output.putPOJO("output", getCardDeepCopy(table.getTable().get(x).get(y)));
         }
 
         return output;
