@@ -23,10 +23,9 @@ public final class LoadNewGame {
      */
     public static void loadStartGame(final Table table, final StartGameInput startGame) {
         table.setTable(new ArrayList<>());
-        table.getTable().add(new ArrayList<>());
-        table.getTable().add(new ArrayList<>());
-        table.getTable().add(new ArrayList<>());
-        table.getTable().add(new ArrayList<>());
+        for (int row = 0; row < Constants.ROWCOUNT; ++row) {
+            table.getTable().add(new ArrayList<>());
+        }
 
         table.getPlayer1().setHero((Hero) getCard(startGame.getPlayerOneHero()));
         table.getPlayer2().setHero((Hero) getCard(startGame.getPlayerTwoHero()));
