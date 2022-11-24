@@ -34,7 +34,7 @@ public final class Stats {
     }
 
     /**
-     *  TODO
+     *  resets stats
      */
     public static void resetStats() {
         gamesPlayed = 0;
